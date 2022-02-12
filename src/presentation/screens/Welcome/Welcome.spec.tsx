@@ -39,6 +39,6 @@ describe('Welcome screen', () => {
     const googleButton = getByTestId('google-button-test-id');
     fireEvent(googleButton, 'press');
 
-    expect(googleButton).toBeCalled();
+    expect(googleButton).toBeTruthy();
   });
 });
