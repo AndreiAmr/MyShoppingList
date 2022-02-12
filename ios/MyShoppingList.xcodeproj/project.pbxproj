@@ -17,6 +17,7 @@
 		EF2AB9A6B37547EC86755650 /* FiraSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 758ECFDE56D441179935BCDB /* FiraSans-Bold.ttf */; };
 		D64D017A7BEB40F7A8B44368 /* FiraSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7F5C7991ABB448A87981ACD /* FiraSans-Medium.ttf */; };
 		1C98A67787E740929EC9370E /* FiraSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AD78AD7C79034213B77DB1F2 /* FiraSans-Regular.ttf */; };
+		A26FA3EEC7CE4CED845CC994 /* welcom-image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6E86F299A0BF44379211288E /* welcom-image.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		758ECFDE56D441179935BCDB /* FiraSans-Bold.ttf */ = {isa = PBXFileReference; name = "FiraSans-Bold.ttf"; path = "../src/presentation/assets/fonts/FiraSans-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		E7F5C7991ABB448A87981ACD /* FiraSans-Medium.ttf */ = {isa = PBXFileReference; name = "FiraSans-Medium.ttf"; path = "../src/presentation/assets/fonts/FiraSans-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		AD78AD7C79034213B77DB1F2 /* FiraSans-Regular.ttf */ = {isa = PBXFileReference; name = "FiraSans-Regular.ttf"; path = "../src/presentation/assets/fonts/FiraSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6E86F299A0BF44379211288E /* welcom-image.jpg */ = {isa = PBXFileReference; name = "welcom-image.jpg"; path = "../src/presentation/assets/images/welcom-image.jpg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 				758ECFDE56D441179935BCDB /* FiraSans-Bold.ttf */,
 				E7F5C7991ABB448A87981ACD /* FiraSans-Medium.ttf */,
 				AD78AD7C79034213B77DB1F2 /* FiraSans-Regular.ttf */,
+				6E86F299A0BF44379211288E /* welcom-image.jpg */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				EF2AB9A6B37547EC86755650 /* FiraSans-Bold.ttf in Resources */,
 				D64D017A7BEB40F7A8B44368 /* FiraSans-Medium.ttf in Resources */,
 				1C98A67787E740929EC9370E /* FiraSans-Regular.ttf in Resources */,
+				A26FA3EEC7CE4CED845CC994 /* welcom-image.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
