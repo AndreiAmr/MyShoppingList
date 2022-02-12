@@ -9,7 +9,12 @@ const Welcome = () => {
         Sua lista de compras inteligente!
       </S.Description>
 
-      <S.GoogleButton testID="google-button-test-id" />
+      <S.Button testID="google-button-test-id" bottomLeft>
+        <S.ButtonText>Entrar com Google</S.ButtonText>
+      </S.Button>
+      <S.Button testID="about-button-test-id" topLeft>
+        <S.ButtonText>Sobre o app</S.ButtonText>
+      </S.Button>
     </S.Container>
   );
 };
