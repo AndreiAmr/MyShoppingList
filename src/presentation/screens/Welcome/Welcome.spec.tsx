@@ -5,6 +5,13 @@ import { ThemeProvider } from 'styled-components/native';
 import Welcome from '.';
 import theme from '../../styles/theme';
 
+jest.mock('react-native-responsive-screen', () => {
+  return {
+    heightPercentageToDP: jest.fn(() => 10),
+    widthPercentageToDP: jest.fn(() => 10),
+  };
+});
+
 const ComponentToTest = () => {
   return (
     <ThemeProvider theme={theme}>
@@ -40,5 +47,13 @@ describe('Welcome screen', () => {
     fireEvent(googleButton, 'press');
 
     expect(googleButton).toBeTruthy();
+  });
+
+  it('should have a About The App button', () => {
+    const { getByTestId } = render(<ComponentToTest />);
+    const AboutButton = getByTestId('about-button-test-id');
+    fireEvent(AboutButton, 'press');
+
+    expect(AboutButton).toBeTruthy();
   });
 });
