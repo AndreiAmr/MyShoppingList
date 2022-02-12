@@ -12,6 +12,9 @@ jest.mock('react-native-responsive-screen', () => {
   };
 });
 
+jest.mock('@react-native-google-signin/google-signin', () => {});
+jest.mock('@react-native-firebase/auth', () => {});
+
 const ComponentToTest = () => {
   return (
     <ThemeProvider theme={theme}>
