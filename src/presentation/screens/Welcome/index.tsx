@@ -1,11 +1,15 @@
 import React from 'react';
-import { Text } from 'react-native';
 import * as S from './styles';
 
 const Welcome = () => {
   return (
     <S.Container>
-      <Text> Welcome screen</Text>
+      <S.AppName testID="app-name-test-id">My Shopping List</S.AppName>
+      <S.Description testID="app-description-test-id">
+        Sua lista de compras inteligente!
+      </S.Description>
+
+      <S.GoogleButton testID="google-button-test-id" />
     </S.Container>
   );
 };
