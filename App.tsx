@@ -3,6 +3,7 @@ import { ThemeProvider } from 'styled-components/native';
 import Routes from './src/presentation/routes';
 import theme from './src/presentation/styles/theme';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const App = () => {
   useEffect(() => {
@@ -13,9 +14,11 @@ const App = () => {
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <Routes />
-    </ThemeProvider>
+    <SafeAreaView style={{ flex: 1 }}>
+      <ThemeProvider theme={theme}>
+        <Routes />
+      </ThemeProvider>
+    </SafeAreaView>
   );
 };
 

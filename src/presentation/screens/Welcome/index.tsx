@@ -5,8 +5,10 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import constants from '../../routes/constants';
+import { useTheme } from 'styled-components/native';
 
 const Welcome = () => {
+  const theme = useTheme();
   const navigation = useNavigation();
   const handleSigninGoogle = async () => {
     try {
@@ -23,7 +25,7 @@ const Welcome = () => {
     <S.Container>
       <StatusBar
         translucent
-        backgroundColor="transparent"
+        backgroundColor={theme.color.background}
         barStyle={'dark-content'}
       />
       <S.Image />

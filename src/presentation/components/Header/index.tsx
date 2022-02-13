@@ -1,6 +1,7 @@
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import React from 'react';
+import { useTheme } from 'styled-components/native';
 
 import * as S from './styles';
 
@@ -10,10 +11,11 @@ interface HeaderProps {
 }
 
 const Header = ({ goBackLabel, title }: HeaderProps) => {
+  const theme = useTheme();
   return (
     <S.Container>
       <S.GoBackButton>
-        <FontAwesomeIcon icon={faChevronLeft} />
+        <FontAwesomeIcon icon={faChevronLeft} color={theme.color.text_header} />
         <S.GoBackLabel testID="go-back-button-test-id">
           {goBackLabel}
         </S.GoBackLabel>
