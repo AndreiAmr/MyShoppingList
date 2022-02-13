@@ -1,4 +1,5 @@
 export default {
   welcome: 'WELCOME',
-  home: 'home',
+  home: 'HOME',
+  newlist: 'NEWLIST',
 };

@@ -3,23 +3,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTheme } from 'styled-components/native';
 import Header from '../../components/Header';
-import auth from '@react-native-firebase/auth';
 
 import * as S from './styles';
+import { useNavigation } from '@react-navigation/native';
+import { getUserName } from '../../../integrations/User/user';
+import constants from '../../routes/constants';
 
 const Home = () => {
   const theme = useTheme();
+  const navigation = useNavigation();
   const [name, setName] = useState<string>();
 
-  const getUserName = useCallback(async () => {
-    const userName: string = auth().currentUser?.displayName as string;
-
+  const getName = useCallback(async () => {
+    const userName = getUserName();
     setName(userName);
   }, []);
 
+  const navigateToNewList = () => {
+    navigation.navigate(constants.newlist);
+  };
+
   useEffect(() => {
-    getUserName();
-  }, [getUserName]);
+    getName();
+  }, [getName]);
 
   return (
     <S.Container>
@@ -32,7 +38,7 @@ const Home = () => {
       </S.GreetingsContainer>
       <S.WishTodayText>O que deseja hoje ?</S.WishTodayText>
       <S.OptionsContainer>
-        <S.OptionButton>
+        <S.OptionButton onPress={navigateToNewList}>
           <FontAwesomeIcon icon={faPlus} color={theme.color.primary} />
           <S.OptionText>Nova lista</S.OptionText>
         </S.OptionButton>
