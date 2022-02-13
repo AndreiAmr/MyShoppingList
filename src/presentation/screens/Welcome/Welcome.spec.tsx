@@ -12,6 +12,12 @@ jest.mock('react-native-responsive-screen', () => {
   };
 });
 
+jest.mock('@react-navigation/native', () => {
+  return {
+    useNavigation: () => {},
+  };
+});
+
 jest.mock('@react-native-google-signin/google-signin', () => {});
 jest.mock('@react-native-firebase/auth', () => {});
 
