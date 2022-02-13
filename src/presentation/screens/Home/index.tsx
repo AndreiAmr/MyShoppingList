@@ -8,6 +8,7 @@ import * as S from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { getUserName } from '../../../integrations/User/user';
 import constants from '../../routes/constants';
+import ScreenTitle from '../../components/ScreenTitle';
 
 const Home = () => {
   const theme = useTheme();
@@ -30,12 +31,7 @@ const Home = () => {
   return (
     <S.Container>
       <Header goBackLabel="sair" title="Home" />
-      <S.GreetingsContainer>
-        <S.Greeting highlighted={false}>
-          Olá, {'\n'}
-          <S.Greeting highlighted>{name}!</S.Greeting>
-        </S.Greeting>
-      </S.GreetingsContainer>
+      <ScreenTitle normal="Olá," highlighted={name ? name : ''} />
       <S.WishTodayText>O que deseja hoje ?</S.WishTodayText>
       <S.OptionsContainer>
         <S.OptionButton onPress={navigateToNewList}>

@@ -6,6 +6,8 @@ export default {
     button: '#E0E6F6',
     text_dark: '#280654',
     text_header: '#685680',
+    button_secondary: '#6F00B4',
+    light: '#ffffff',
   },
   fonts: {
     regular: 'FiraSans-Regular',
