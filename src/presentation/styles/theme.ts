@@ -5,6 +5,7 @@ export default {
     secondary: '#A174DA',
     button: '#E0E6F6',
     text_dark: '#280654',
+    text_header: '#685680',
   },
   fonts: {
     regular: 'FiraSans-Regular',

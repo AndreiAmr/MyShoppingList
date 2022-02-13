@@ -1,16 +1,21 @@
 import React from 'react';
-import { Alert, StatusBar } from 'react-native';
+import { StatusBar } from 'react-native';
 import * as S from './styles';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
+import { useNavigation } from '@react-navigation/native';
+import constants from '../../routes/constants';
+import { useTheme } from 'styled-components/native';
 
 const Welcome = () => {
+  const theme = useTheme();
+  const navigation = useNavigation();
   const handleSigninGoogle = async () => {
     try {
       const { idToken } = await GoogleSignin.signIn();
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
       await auth().signInWithCredential(googleCredential);
-      Alert.alert('logado com google');
+      navigation.navigate(constants.home);
     } catch (err) {
       console.log(err);
     }
@@ -20,7 +25,7 @@ const Welcome = () => {
     <S.Container>
       <StatusBar
         translucent
-        backgroundColor="transparent"
+        backgroundColor={theme.color.background}
         barStyle={'dark-content'}
       />
       <S.Image />
