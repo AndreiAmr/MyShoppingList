@@ -64,9 +64,9 @@ export const PriceInput = styled.TextInput`
 
 export const SubmitButton = styled.TouchableOpacity`
   width: 100%;
-  height: ${heightPercentageToDP(6)}px;
+  height: ${heightPercentageToDP(9)}px;
   background: ${({ theme }) => theme.color.button_secondary};
-  border-top-right-radius: ${widthPercentageToDP(7)}px;
+  /* border-top-right-radius: ${widthPercentageToDP(7)}px; */
   margin-top: ${heightPercentageToDP(4)}px;
   justify-content: center;
   align-items: center;

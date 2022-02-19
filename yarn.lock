@@ -1347,6 +1347,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-14.3.3.tgz#5d3f7366b700a396165557af92a6a2a290fce470"
   integrity sha512-sCHbtWEATKHJ0JQmMQQGRYslYcxh8RWxHhwLExtmVsY4SInda7N7FL++aE02VX8p730cDjj95lieS+jIxKgI2Q==
 
+"@react-native-firebase/firestore@^14.3.3":
+  version "14.3.3"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/firestore/-/firestore-14.3.3.tgz#75367363daa7b46b95cb9c262e70b6850127d555"
+  integrity sha512-77BZQz6t8g5BMNcI636uLGdVZTovXWeATHe5tCctV7yBLoFWfmmRD2exPa/Svm9BTKbXdfLxSxqKj1OzReD5yQ==
+
 "@react-native-google-signin/google-signin@^7.0.4":
   version "7.0.4"
   resolved "https://registry.yarnpkg.com/@react-native-google-signin/google-signin/-/google-signin-7.0.4.tgz#b557be28dac0af8fd020010b8a9670ae65bedba8"
@@ -6110,6 +6115,11 @@ react-native-svg@^12.1.1:
   dependencies:
     css-select "^2.1.0"
     css-tree "^1.0.0-alpha.39"
+
+react-native-uuid@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-uuid/-/react-native-uuid-2.0.1.tgz#ed4e2dfb1683eddb66967eb5dca140dfe1abddb9"
+  integrity sha512-cptnoIbL53GTCrWlb/+jrDC6tvb7ypIyzbXNJcpR3Vab0mkeaaVd5qnB3f0whXYzS+SMoSQLcUUB0gEWqkPC0g==
 
 react-native@0.67.2:
   version "0.67.2"
