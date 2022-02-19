@@ -12,11 +12,11 @@ export const Container = styled.View`
 export const NormalText = styled.Text`
   color: ${({ theme }) => theme.color.text_header};
   font-family: ${({ theme }) => theme.fonts.medium};
-  font-size: ${widthPercentageToDP(9)}px;
+  font-size: ${widthPercentageToDP(8)}px;
 `;
 
 export const HighLighted = styled.Text`
   color: ${({ theme }) => theme.color.primary};
-  font-family: ${({ theme }) => theme.fonts.medium};
-  font-size: ${widthPercentageToDP(9)}px;
+  font-family: ${({ theme }) => theme.fonts.bold};
+  font-size: ${widthPercentageToDP(8)}px;
 `;

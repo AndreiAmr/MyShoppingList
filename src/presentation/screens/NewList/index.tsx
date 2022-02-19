@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import ScreenTitle from '../../components/ScreenTitle';
-import { Alert, Modal } from 'react-native';
+import { Modal } from 'react-native';
 
 import * as S from './styles';
 import ModalAddItem from '../../components/ModalAddItem';
+import { ItemProps } from '../../../types/item';
+import { getUntakedItems } from '../../../integrations/Item';
+import Item from '../../components/Item';
 
 const NewList = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [unpayedItems, setUnpayedItems] = useState<ItemProps[]>([]);
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -17,7 +21,19 @@ const NewList = () => {
     setModalOpen(false);
   };
 
-  const handleSubmit = () => {};
+  const handleChangeUnpayedItems = (data: ItemProps[]) => {
+    setUnpayedItems(data);
+  };
+
+  const getItems = useCallback(() => {
+    getUntakedItems({
+      callback: handleChangeUnpayedItems,
+    });
+  }, []);
+
+  useEffect(() => {
+    getItems();
+  }, [getItems]);
 
   return (
     <S.Container>
@@ -29,16 +45,18 @@ const NewList = () => {
           <S.AddItemButtonText>add. item </S.AddItemButtonText>
         </S.AddItemButton>
       </S.SearchAndAddContainer>
+      <S.ItemsTitle>Itens na lista</S.ItemsTitle>
+      {unpayedItems.map(item => (
+        <Item name={item.name} note={item.note} quantity={item.quantity} />
+      ))}
+
       <Modal
         transparent
         visible={modalOpen}
-        animationType="slide"
-        onRequestClose={() => Alert.alert("i'm closing")}
+        animationType="fade"
+        onRequestClose={handleCloseModal}
       >
-        <ModalAddItem
-          handleCloseModal={handleCloseModal}
-          handleSubmit={handleSubmit}
-        />
+        <ModalAddItem handleCloseModal={handleCloseModal} />
       </Modal>
     </S.Container>
   );

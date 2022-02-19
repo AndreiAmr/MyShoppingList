@@ -4,7 +4,7 @@ import {
 } from 'react-native-responsive-screen';
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   flex: 1;
   background: ${({ theme }) => theme.color.background};
 `;
@@ -42,4 +42,11 @@ export const AddItemButtonText = styled.Text`
   color: ${({ theme }) => theme.color.light};
   font-family: ${({ theme }) => theme.fonts.medium};
   font-size: ${widthPercentageToDP(4.5)}px;
+`;
+
+export const ItemsTitle = styled.Text`
+  font-size: ${heightPercentageToDP(3.5)}px;
+  color: ${({ theme }) => theme.color.primary};
+  font-family: ${({ theme }) => theme.fonts.medium};
+  margin: ${heightPercentageToDP(4)}px ${widthPercentageToDP(7)}px;
 `;

@@ -38,6 +38,8 @@ export const InputLabel = styled.Text`
 export const Input = styled.TextInput`
   border-bottom-width: 3px;
   border-bottom-color: ${({ theme }) => theme.color.primary};
+  color: ${({ theme }) => theme.color.text_dark};
+  font-family: ${({ theme }) => theme.fonts.medium};
 `;
 
 export const PriceAndQuantityContainer = styled.View`

@@ -2,7 +2,7 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import uuid from 'react-native-uuid';
 
-import { NewItemProps } from '../../types/item';
+import { GetUntakedItemsProps, ItemProps } from '../../types/item';
 
 export const createNewItem = async ({
   name,
@@ -10,7 +10,7 @@ export const createNewItem = async ({
   quantity,
   price,
   createdAt,
-}: NewItemProps) => {
+}: ItemProps) => {
   try {
     const userId = auth().currentUser?.uid;
 
@@ -25,10 +25,50 @@ export const createNewItem = async ({
         createdAt,
         payedAt: null,
         updatedAt: null,
-      } as NewItemProps);
+        takedAt: null,
+      } as ItemProps);
     return true;
   } catch (err) {
-    console.log(err + 'salve salve');
-    throw new Error('meu erro teste');
+    return err;
+  }
+};
+
+export const getUntakedItems = ({ callback }: GetUntakedItemsProps) => {
+  try {
+    const userID = auth().currentUser?.uid;
+
+    firestore()
+      .collection(`${userID}`)
+      .onSnapshot(snapshot => {
+        const allList = snapshot.docs.map(doc => {
+          const {
+            createdAt,
+            name,
+            note,
+            payedAt,
+            price,
+            quantity,
+            takedAt,
+            updatedAt,
+          } = doc.data() as ItemProps;
+
+          return {
+            id: doc.id,
+            createdAt,
+            name,
+            note,
+            payedAt,
+            price,
+            quantity,
+            takedAt,
+            updatedAt,
+          };
+        }) as ItemProps[];
+
+        const data = allList.filter(item => item.takedAt === null);
+        callback(data as ItemProps[]);
+      });
+  } catch (err) {
+    return err;
   }
 };

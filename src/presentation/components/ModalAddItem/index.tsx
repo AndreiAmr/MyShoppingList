@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import * as S from './styles';
 import { createNewItem } from '../../../integrations/Item';
+import { ItemProps } from '../../../types/item';
+import { useTheme } from 'styled-components/native';
 
 interface ModalAddItemProps {
   handleCloseModal: () => void;
 }
 
 const ModalAddItem = ({ handleCloseModal }: ModalAddItemProps) => {
+  const theme = useTheme();
   const [name, setName] = useState<string>('');
   const [note, setNote] = useState<string>('');
   const [price, setPrice] = useState<number>(0);
@@ -21,7 +24,8 @@ const ModalAddItem = ({ handleCloseModal }: ModalAddItemProps) => {
         price,
         quantity,
         createdAt,
-      });
+      } as ItemProps);
+      handleCloseModal();
     } catch (err) {
       console.log(err);
     }
@@ -49,11 +53,19 @@ const ModalAddItem = ({ handleCloseModal }: ModalAddItemProps) => {
         <S.ModalTitle>Adicionar item</S.ModalTitle>
         <S.InputContainer>
           <S.InputLabel>Nome</S.InputLabel>
-          <S.Input placeholder="Digite aqui" onChangeText={handleChangeName} />
+          <S.Input
+            placeholderTextColor={theme.color.primary}
+            placeholder="Digite aqui"
+            onChangeText={handleChangeName}
+          />
         </S.InputContainer>
         <S.InputContainer>
           <S.InputLabel>Observações</S.InputLabel>
-          <S.Input placeholder="Digite aqui" onChangeText={handleChangeNote} />
+          <S.Input
+            placeholderTextColor={theme.color.primary}
+            placeholder="Digite aqui"
+            onChangeText={handleChangeNote}
+          />
         </S.InputContainer>
 
         <S.PriceAndQuantityContainer>
@@ -61,6 +73,7 @@ const ModalAddItem = ({ handleCloseModal }: ModalAddItemProps) => {
             <S.PriceTitle>Preço</S.PriceTitle>
             <S.PriceInput
               keyboardType="numeric"
+              placeholderTextColor={theme.color.primary}
               placeholder="R$"
               onChangeText={value => handleChangePrice(+value)}
             />
@@ -69,6 +82,7 @@ const ModalAddItem = ({ handleCloseModal }: ModalAddItemProps) => {
             <S.PriceTitle>Quantidade </S.PriceTitle>
             <S.PriceInput
               keyboardType="numeric"
+              placeholderTextColor={theme.color.primary}
               placeholder="X"
               onChangeText={value => handleChangeQuantity(+value)}
             />
