@@ -18,6 +18,9 @@ jest.mock('@fortawesome/react-native-fontawesome', () => {
   };
 });
 
+jest.mock('@react-native-firebase/firestore', () => {});
+jest.mock('@react-native-firebase/auth', () => {});
+
 const ComponentToTest = () => {
   return (
     <ThemeProvider theme={theme}>
