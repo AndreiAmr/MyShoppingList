@@ -10,13 +10,13 @@ export const Container = styled.View`
 `;
 
 export const NormalText = styled.Text`
-  color: ${({ theme }) => theme.color.text_header};
+  color: ${({ theme }) => theme.color.button};
   font-family: ${({ theme }) => theme.fonts.medium};
   font-size: ${widthPercentageToDP(8)}px;
 `;
 
 export const HighLighted = styled.Text`
-  color: ${({ theme }) => theme.color.primary};
+  color: ${({ theme }) => theme.color.light};
   font-family: ${({ theme }) => theme.fonts.bold};
   font-size: ${widthPercentageToDP(8)}px;
 `;

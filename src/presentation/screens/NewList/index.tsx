@@ -1,14 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import Header from '../../components/Header';
-import ScreenTitle from '../../components/ScreenTitle';
 import { Modal } from 'react-native';
-
-import * as S from './styles';
-import ModalAddItem from '../../components/ModalAddItem';
-import { ItemProps } from '../../../types/item';
-import { getUntakedItems } from '../../../integrations/Item';
-import Item from '../../components/Item';
 import { useTheme } from 'styled-components/native';
+import { getUntakedItems } from '../../../integrations/Item';
+import { ItemProps } from '../../../types/item';
+import Header from '../../components/Header';
+import Item from '../../components/Item';
+import ModalAddItem from '../../components/ModalAddItem';
+import ScreenTitle from '../../components/ScreenTitle';
+import * as S from './styles';
 
 const NewList = () => {
   const theme = useTheme();
@@ -40,16 +39,18 @@ const NewList = () => {
   return (
     <S.Container>
       <Header goBackLabel="voltar" title="Nova Lista" />
-      <ScreenTitle normal="Adicionar item," highlighted="Ver Lista" />
-      <S.SearchAndAddContainer>
-        <S.SearchContainer
-          placeholderTextColor={theme.color.primary}
-          placeholder="Pesquise aqui"
-        />
-        <S.AddItemButton onPress={handleOpenModal}>
-          <S.AddItemButtonText>add. item </S.AddItemButtonText>
-        </S.AddItemButton>
-      </S.SearchAndAddContainer>
+      <S.TitleContainer>
+        <ScreenTitle normal="Adicionar item," highlighted="Ver Lista" />
+        <S.SearchAndAddContainer>
+          <S.SearchInput
+            placeholderTextColor={theme.color.primary}
+            placeholder="Pesquise aqui"
+          />
+          <S.AddItemButton onPress={handleOpenModal}>
+            <S.AddItemButtonText>add. item </S.AddItemButtonText>
+          </S.AddItemButton>
+        </S.SearchAndAddContainer>
+      </S.TitleContainer>
       <S.ItemsTitle>Itens na lista</S.ItemsTitle>
       {unpayedItems.map(item => (
         <Item name={item.name} note={item.note} quantity={item.quantity} />

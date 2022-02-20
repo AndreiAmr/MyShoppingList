@@ -9,13 +9,21 @@ export const Container = styled.ScrollView`
   background: ${({ theme }) => theme.color.background};
 `;
 
+export const TitleContainer = styled.View`
+  background: ${({ theme }) => theme.color.button_secondary};
+  padding-bottom: 30px;
+  border-bottom-left-radius: ${widthPercentageToDP(6)}px;
+  border-bottom-right-radius: ${widthPercentageToDP(6)}px;
+  elevation: 5;
+`;
+
 export const SearchAndAddContainer = styled.View`
   flex-direction: row;
   align-items: center;
   margin-top: ${widthPercentageToDP(5)}px;
 `;
 
-export const SearchContainer = styled.TextInput`
+export const SearchInput = styled.TextInput`
   width: ${widthPercentageToDP(60)}px;
   height: ${heightPercentageToDP(7)}px;
   background: ${({ theme }) => theme.color.button};
@@ -30,7 +38,7 @@ export const AddItemButton = styled.TouchableOpacity`
   height: ${heightPercentageToDP(7)}px;
   padding: 7px;
   /* width: ${heightPercentageToDP(10)}px; */
-  background: ${({ theme }) => theme.color.button_secondary};
+  background: ${({ theme }) => theme.color.button};
   margin-left: ${widthPercentageToDP(2)}px;
   border-radius: 10px;
 
@@ -39,9 +47,10 @@ export const AddItemButton = styled.TouchableOpacity`
 `;
 
 export const AddItemButtonText = styled.Text`
-  color: ${({ theme }) => theme.color.light};
+  color: ${({ theme }) => theme.color.button_secondary};
   font-family: ${({ theme }) => theme.fonts.medium};
   font-size: ${widthPercentageToDP(4.5)}px;
+  elevation: 7;
 `;
 
 export const ItemsTitle = styled.Text`
