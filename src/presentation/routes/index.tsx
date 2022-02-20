@@ -1,21 +1,21 @@
+import {
+  faBagShopping,
+  faBasketShopping,
+  faHandHoldingDollar,
+} from '@fortawesome/free-solid-svg-icons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
+import { heightPercentageToDP } from 'react-native-responsive-screen';
+import { useTheme } from 'styled-components';
+import TabButton from '../components/TabButton';
+import AddReceipt from '../screens/AddReceipt';
 import Home from '../screens/Home';
+import ItemsTaked from '../screens/ItemsTaked';
 import NewList from '../screens/NewList';
 import Welcome from '../screens/Welcome';
 import constants from './constants';
-import { useTheme } from 'styled-components';
-import { heightPercentageToDP } from 'react-native-responsive-screen';
-import TabButton from '../components/TabButton';
-import ItemsTaked from '../screens/ItemsTaked';
-import AddReceipt from '../screens/AddReceipt';
-import {
-  faBasketShopping,
-  faBagShopping,
-  faReceipt,
-} from '@fortawesome/free-solid-svg-icons';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -79,8 +79,8 @@ const NewListBottomTab = () => {
             <TabButton
               size={size}
               focused={focused}
-              label="Recibo"
-              icon={faReceipt}
+              label="Total"
+              icon={faHandHoldingDollar}
             />
           ),
         }}
