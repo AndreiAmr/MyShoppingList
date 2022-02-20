@@ -15,11 +15,12 @@ export const NewItemContainer = styled.TouchableOpacity`
 
 export const ModalContent = styled.TouchableOpacity`
   flex: 1;
+  background: ${({ theme }) => theme.color.primary}70;
 `;
 
 export const ModalTitle = styled.Text`
   font-size: ${widthPercentageToDP(7)}px;
-  color: ${({ theme }) => theme.color.text_dark};
+  color: ${({ theme }) => theme.color.secondary};
   font-family: ${({ theme }) => theme.fonts.medium};
   text-align: center;
   margin: ${heightPercentageToDP(3)}px;
@@ -33,13 +34,15 @@ export const InputLabel = styled.Text`
   font-size: ${widthPercentageToDP(6)}px;
   color: ${({ theme }) => theme.color.primary};
   font-family: ${({ theme }) => theme.fonts.medium};
+  margin-bottom: 5px;
 `;
 
 export const Input = styled.TextInput`
-  border-bottom-width: 3px;
-  border-bottom-color: ${({ theme }) => theme.color.primary};
+  background: ${({ theme }) => theme.color.button};
   color: ${({ theme }) => theme.color.text_dark};
   font-family: ${({ theme }) => theme.fonts.medium};
+  border-radius: 9px;
+  padding-left: 10px;
 `;
 
 export const PriceAndQuantityContainer = styled.View`
@@ -55,23 +58,24 @@ export const PriceTitle = styled.Text`
   font-size: ${widthPercentageToDP(6)}px;
   color: ${({ theme }) => theme.color.primary};
   font-family: ${({ theme }) => theme.fonts.medium};
+  margin-bottom: 5px;
 `;
 
 export const PriceInput = styled.TextInput`
-  border-bottom-width: 3px;
-  border-bottom-color: ${({ theme }) => theme.color.primary};
-  min-width: ${widthPercentageToDP(7)}px;
+  min-width: ${widthPercentageToDP(19)}px;
   text-align: center;
+  background: ${({ theme }) => theme.color.button};
+  border-radius: 7px;
 `;
 
 export const SubmitButton = styled.TouchableOpacity`
   width: 100%;
   height: ${heightPercentageToDP(9)}px;
-  background: ${({ theme }) => theme.color.button_secondary};
-  /* border-top-right-radius: ${widthPercentageToDP(7)}px; */
+  background: ${({ theme }) => theme.color.text_dark};
   margin-top: ${heightPercentageToDP(4)}px;
   justify-content: center;
   align-items: center;
+  margin-bottom: -2px;
 `;
 export const SubmitText = styled.Text`
   font-size: ${widthPercentageToDP(6)}px;

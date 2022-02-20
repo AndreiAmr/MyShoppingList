@@ -1,11 +1,16 @@
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import React, { useEffect } from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import styled, { ThemeProvider } from 'styled-components/native';
 import Routes from './src/presentation/routes';
 import theme from './src/presentation/styles/theme';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 const SafeArea = styled(SafeAreaView)`
+  flex: 1;
+`;
+
+const GestureHandler = styled(GestureHandlerRootView)`
   flex: 1;
 `;
 
@@ -19,9 +24,11 @@ const App = () => {
 
   return (
     <SafeArea>
-      <ThemeProvider theme={theme}>
-        <Routes />
-      </ThemeProvider>
+      <GestureHandler>
+        <ThemeProvider theme={theme}>
+          <Routes />
+        </ThemeProvider>
+      </GestureHandler>
     </SafeArea>
   );
 };

@@ -14,8 +14,10 @@ export const Container = styled.View`
 `;
 
 export const GreetingsContainer = styled.View`
-  margin-top: ${heightPercentageToDP(7)}px;
-  margin-left: ${widthPercentageToDP(7)}px;
+  background: ${({ theme }) => theme.color.button_secondary};
+  padding-bottom: ${heightPercentageToDP(5)}px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 `;
 
 export const Greeting = styled.Text<GreetingProps>`
@@ -34,20 +36,10 @@ export const WishTodayText = styled.Text`
   margin-left: ${widthPercentageToDP(7)}px;
 `;
 
-export const OptionsContainer = styled.View`
-  flex: 1;
-  background: ${({ theme }) => theme.color.primary};
-  max-width: ${widthPercentageToDP(90)}px;
-  border-top-right-radius: ${widthPercentageToDP(10)}px;
-  margin-top: ${heightPercentageToDP(7)}px;
-  justify-content: center;
-  align-items: center;
-`;
-
 export const OptionButton = styled.TouchableOpacity`
   width: 80%;
   height: ${heightPercentageToDP(7)}px;
-  background: ${({ theme }) => theme.color.button};
+  background: ${({ theme }) => theme.color.button_secondary};
   border-radius: 10px;
   flex-direction: row;
   align-items: center;
@@ -58,7 +50,7 @@ export const OptionButton = styled.TouchableOpacity`
 
 export const OptionText = styled.Text`
   font-size: ${widthPercentageToDP(6)}px;
-  color: ${({ theme }) => theme.color.primary};
+  color: ${({ theme }) => theme.color.button};
   font-family: ${({ theme }) => theme.fonts.medium};
   flex: 1;
   text-align: center;

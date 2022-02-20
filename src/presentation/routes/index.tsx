@@ -28,11 +28,12 @@ const NewListBottomTab = () => {
         headerShown: false,
         tabBarActiveTintColor: theme.color.primary,
         tabBarStyle: {
-          borderTopColor: theme.color.button_secondary,
+          marginHorizontal: 12,
+          marginBottom: 12,
+          borderRadius: 10,
           borderTopWidth: 1,
           paddingBottom: -12,
-          height: heightPercentageToDP(7),
-          paddingTop: 10,
+          height: heightPercentageToDP(8),
         },
         tabBarLabelStyle: {
           fontFamily: theme.fonts.bold,
