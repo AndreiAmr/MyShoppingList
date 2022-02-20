@@ -12,6 +12,12 @@ jest.mock('react-native-responsive-screen', () => {
   };
 });
 
+jest.mock('@react-navigation/native', () => {
+  return {
+    useNavigation: jest.fn(),
+  };
+});
+
 jest.mock('@fortawesome/react-native-fontawesome', () => {
   return {
     FontAwesomeIcon: '',

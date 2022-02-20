@@ -18,6 +18,12 @@ jest.mock('@fortawesome/react-native-fontawesome', () => {
   };
 });
 
+jest.mock('@react-navigation/native', () => {
+  return {
+    useNavigation: jest.fn(),
+  };
+});
+
 const ComponentToTest = () => {
   return (
     <ThemeProvider theme={theme}>
