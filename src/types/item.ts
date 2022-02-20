@@ -17,4 +17,5 @@ export interface ItemComponentProps {
   name: string;
   note: string;
   quantity: number;
+  onPress: () => void;
 }

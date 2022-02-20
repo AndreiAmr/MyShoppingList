@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Modal } from 'react-native';
+import { Modal, Text } from 'react-native';
+import { BottomSheet } from 'react-native-elements';
 import { useTheme } from 'styled-components/native';
 import { getUntakedItems } from '../../../integrations/Item';
 import { ItemProps } from '../../../types/item';
@@ -52,9 +53,21 @@ const NewList = () => {
         </S.SearchAndAddContainer>
       </S.TitleContainer>
       <S.ItemsTitle>Itens na lista</S.ItemsTitle>
+
       {unpayedItems.map(item => (
-        <Item name={item.name} note={item.note} quantity={item.quantity} />
+        <Item
+          name={item.name}
+          note={item.note}
+          quantity={item.quantity}
+          onPress={() => {}}
+        />
       ))}
+
+      <BottomSheet isVisible={true}>
+        <ModalAddItem handleCloseModal={handleCloseModal} />
+
+        <Text> SALVE SALVE</Text>
+      </BottomSheet>
 
       <Modal
         transparent

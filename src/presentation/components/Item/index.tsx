@@ -2,9 +2,9 @@ import React from 'react';
 import { ItemComponentProps } from '../../../types/item';
 import * as S from './styles';
 
-const Item = ({ name, quantity }: ItemComponentProps) => {
+const Item = ({ name, quantity, onPress }: ItemComponentProps) => {
   return (
-    <S.Container>
+    <S.Container onPress={onPress}>
       <S.NameContaiener>
         <S.Name>{name}</S.Name>
         <S.Note>Clique para ver detalhes</S.Note>
