@@ -19,11 +19,12 @@ export const Container = styled.View<ContainerProps>`
     css`
       padding-top: 0px;
       margin-bottom: 25px;
-      background: ${({ theme }) => theme.color.primary};
+      background: ${({ theme }) => theme.color.button_secondary};
     `}
 `;
 
 export const Label = styled.Text`
   font-size: ${heightPercentageToDP(2)}px;
-  color: ${({ theme }) => theme.color.primary};
+  color: ${({ theme }) => theme.color.button_secondary};
+  font-family: ${({ theme }) => theme.fonts.medium};
 `;

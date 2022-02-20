@@ -8,8 +8,10 @@ import ModalAddItem from '../../components/ModalAddItem';
 import { ItemProps } from '../../../types/item';
 import { getUntakedItems } from '../../../integrations/Item';
 import Item from '../../components/Item';
+import { useTheme } from 'styled-components/native';
 
 const NewList = () => {
+  const theme = useTheme();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [unpayedItems, setUnpayedItems] = useState<ItemProps[]>([]);
 
@@ -40,7 +42,10 @@ const NewList = () => {
       <Header goBackLabel="voltar" title="Nova Lista" />
       <ScreenTitle normal="Adicionar item," highlighted="Ver Lista" />
       <S.SearchAndAddContainer>
-        <S.SearchContainer placeholder="Pesquise aqui" />
+        <S.SearchContainer
+          placeholderTextColor={theme.color.primary}
+          placeholder="Pesquise aqui"
+        />
         <S.AddItemButton onPress={handleOpenModal}>
           <S.AddItemButtonText>add. item </S.AddItemButtonText>
         </S.AddItemButton>

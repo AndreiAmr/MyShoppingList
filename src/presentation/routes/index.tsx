@@ -28,7 +28,7 @@ const NewListBottomTab = () => {
         headerShown: false,
         tabBarActiveTintColor: theme.color.primary,
         tabBarStyle: {
-          borderTopColor: theme.color.primary,
+          borderTopColor: theme.color.button_secondary,
           borderTopWidth: 1,
           paddingBottom: -12,
           height: heightPercentageToDP(7),

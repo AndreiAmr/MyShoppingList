@@ -12,7 +12,7 @@ const TabButton = ({ size, label, focused, icon }: TabBarButtonProps) => {
     <S.Container focused={focused}>
       <FontAwesomeIcon
         icon={icon}
-        color={focused ? theme.color.light : theme.color.primary}
+        color={focused ? theme.color.light : theme.color.button_secondary}
         size={size}
       />
       {!focused && <S.Label>{label}</S.Label>}

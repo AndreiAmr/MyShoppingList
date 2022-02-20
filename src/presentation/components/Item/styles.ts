@@ -39,7 +39,7 @@ export const Note = styled.Text`
 export const QuantityContainer = styled.View`
   height: 100%;
   width: 30%;
-  background: ${({ theme }) => theme.color.primary};
+  background: ${({ theme }) => theme.color.button_secondary};
   border-top-left-radius: ${heightPercentageToDP(5)}px;
   border-bottom-left-radius: ${heightPercentageToDP(5)}px;
 
