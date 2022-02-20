@@ -45,23 +45,19 @@ export const OptionsContainer = styled.View`
 `;
 
 export const OptionButton = styled.TouchableOpacity`
-  width: 95%;
-  height: ${heightPercentageToDP(6)}px;
+  width: 80%;
+  height: ${heightPercentageToDP(7)}px;
   background: ${({ theme }) => theme.color.button};
-  border-top-left-radius: ${widthPercentageToDP(2)}px;
-  border-top-right-radius: ${widthPercentageToDP(6)}px;
-  border-bottom-right-radius: ${widthPercentageToDP(2)}px;
-  border-bottom-left-radius: ${widthPercentageToDP(6)}px;
-
+  border-radius: 10px;
   flex-direction: row;
   align-items: center;
   padding: 0 15px;
 
-  margin: 10px;
+  margin: ${heightPercentageToDP(10)}px auto;
 `;
 
 export const OptionText = styled.Text`
-  font-size: ${widthPercentageToDP(5)}px;
+  font-size: ${widthPercentageToDP(6)}px;
   color: ${({ theme }) => theme.color.primary};
   font-family: ${({ theme }) => theme.fonts.medium};
   flex: 1;

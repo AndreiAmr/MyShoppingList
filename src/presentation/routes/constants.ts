@@ -1,4 +1,7 @@
 export default {
   welcome: 'WELCOME',
-  home: 'home',
+  home: 'HOME',
+  newlist: 'NEWLIST',
+  itemsTaked: 'ITEMSTAKED',
+  addReceipt: 'ADDRECEIPT',
 };

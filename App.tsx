@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react';
-import { ThemeProvider } from 'styled-components/native';
+import styled, { ThemeProvider } from 'styled-components/native';
 import Routes from './src/presentation/routes';
 import theme from './src/presentation/styles/theme';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+const SafeArea = styled(SafeAreaView)`
+  flex: 1;
+`;
 
 const App = () => {
   useEffect(() => {
@@ -14,11 +18,11 @@ const App = () => {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeArea>
       <ThemeProvider theme={theme}>
         <Routes />
       </ThemeProvider>
-    </SafeAreaView>
+    </SafeArea>
   );
 };
 
