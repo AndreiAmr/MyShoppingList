@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Modal, Text } from 'react-native';
-import { BottomSheet } from 'react-native-elements';
+import { Modal } from 'react-native';
 import { useTheme } from 'styled-components/native';
 import { getUntakedItems } from '../../../integrations/Item';
 import { ItemProps } from '../../../types/item';
@@ -62,12 +61,6 @@ const NewList = () => {
           onPress={() => {}}
         />
       ))}
-
-      <BottomSheet isVisible={true}>
-        <ModalAddItem handleCloseModal={handleCloseModal} />
-
-        <Text> SALVE SALVE</Text>
-      </BottomSheet>
 
       <Modal
         transparent
