@@ -52,6 +52,6 @@ export const QuantityContainer = styled.View`
 export const Quantity = styled.Text<{ small?: boolean }>`
   color: #fff;
   font-size: ${({ small }) =>
-    small ? heightPercentageToDP(3) : heightPercentageToDP(5)};
+    small ? heightPercentageToDP(3) : heightPercentageToDP(5)}px;
   font-family: ${({ theme }) => theme.fonts.bold};
 `;

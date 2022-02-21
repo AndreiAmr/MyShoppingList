@@ -19,3 +19,10 @@ export interface ItemComponentProps {
   quantity: number;
   onPress: () => void;
 }
+
+export interface ModalItemProps {
+  name: string;
+  quantity?: number;
+  price?: number;
+  note: string;
+}
