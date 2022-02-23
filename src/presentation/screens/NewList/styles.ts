@@ -4,7 +4,7 @@ import {
 } from 'react-native-responsive-screen';
 import styled from 'styled-components/native';
 
-export const Container = styled.ScrollView`
+export const Container = styled.View`
   flex: 1;
   background: ${({ theme }) => theme.color.background};
 `;
@@ -58,3 +58,5 @@ export const ItemsTitle = styled.Text`
   font-family: ${({ theme }) => theme.fonts.medium};
   margin: ${heightPercentageToDP(4)}px ${widthPercentageToDP(7)}px;
 `;
+
+export const ItemsContainer = styled.ScrollView``;
