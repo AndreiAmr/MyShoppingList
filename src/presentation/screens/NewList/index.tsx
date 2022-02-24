@@ -17,6 +17,7 @@ const NewList = () => {
   const [unpayedItems, setUnpayedItems] = useState<ItemProps[]>([]);
   const bottomSheetRef = useRef<Modalize>(null);
   const [itemDetails, setItemDetails] = useState<ModalItemProps>();
+  const [activeFilter, setActiveFilter] = useState<string>();
 
   const handleCloseModal = () => {
     setModalOpen(false);
@@ -37,6 +38,10 @@ const NewList = () => {
     bottomSheetRef.current?.open();
   };
 
+  const handleChangeActiveFilter = (filterName: string) => {
+    setActiveFilter(filterName);
+  };
+
   useEffect(() => {
     getItems();
   }, [getItems]);
@@ -52,13 +57,25 @@ const NewList = () => {
       </S.SearchContainer>
 
       <S.FiltersContainer>
-        <S.FilterButton color="purple">
+        <S.FilterButton
+          onPress={() => handleChangeActiveFilter('purple')}
+          active={activeFilter === 'purple'}
+          color="purple"
+        >
           <S.FilterText>Prioridade</S.FilterText>
         </S.FilterButton>
-        <S.FilterButton color="green">
+        <S.FilterButton
+          onPress={() => handleChangeActiveFilter('green')}
+          active={activeFilter === 'green'}
+          color="green"
+        >
           <S.FilterText>Preço</S.FilterText>
         </S.FilterButton>
-        <S.FilterButton color="orange">
+        <S.FilterButton
+          onPress={() => handleChangeActiveFilter('orange')}
+          active={activeFilter === 'orange'}
+          color="orange"
+        >
           <S.FilterText>Data de criação</S.FilterText>
         </S.FilterButton>
       </S.FiltersContainer>
