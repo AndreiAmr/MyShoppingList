@@ -1,9 +1,5 @@
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useEffect, useState } from 'react';
-import { heightPercentageToDP } from 'react-native-responsive-screen';
-import { useTheme } from 'styled-components/native';
 import { getUserName } from '../../../integrations/User/user';
 import Button from '../../components/Button';
 import Header from '../../components/Header';
@@ -12,7 +8,6 @@ import constants from '../../routes/constants';
 import * as S from './styles';
 
 const Home = () => {
-  const theme = useTheme();
   const navigation = useNavigation();
   const [name, setName] = useState<string>();
 
