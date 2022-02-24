@@ -1,11 +1,12 @@
 export default {
   color: {
-    background: '#FFFFFF',
+    background: '#F9F9F9',
     purple_light: '#C490E4',
     purple_dark: '#AA4BE4',
     green: '#7DD866',
     blue: '#54BAB9',
     orange: '#FF7878',
+    disabled: '#86ABAB',
     primary: '#6458A4',
     secondary: '#A174DA',
     button: '#E0E6F6',

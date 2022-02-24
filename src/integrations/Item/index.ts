@@ -10,6 +10,8 @@ export const createNewItem = async ({
   quantity,
   price,
   createdAt,
+  priorityLevel,
+  itemColor,
 }: ItemProps) => {
   try {
     const userId = auth().currentUser?.uid;
@@ -23,6 +25,8 @@ export const createNewItem = async ({
         price,
         quantity,
         createdAt,
+        priorityLevel,
+        itemColor,
         payedAt: null,
         updatedAt: null,
         takedAt: null,

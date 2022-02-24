@@ -1,8 +1,9 @@
 import {
-  faBagShopping,
   faBasketShopping,
   faHandHoldingDollar,
+  faPlus,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -10,9 +11,10 @@ import React from 'react';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
 import { useTheme } from 'styled-components';
 import TabButton from '../components/TabButton';
+import AddItem from '../screens/AddItem';
 import AddReceipt from '../screens/AddReceipt';
 import Home from '../screens/Home';
-import ItemsTaked from '../screens/ItemsTaked';
+
 import NewList from '../screens/NewList';
 import Welcome from '../screens/Welcome';
 import constants from './constants';
@@ -26,7 +28,7 @@ const NewListBottomTab = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: theme.color.primary,
+        tabBarActiveTintColor: theme.color.blue,
         tabBarStyle: {
           borderRadius: 10,
           paddingBottom: -12,
@@ -42,29 +44,25 @@ const NewListBottomTab = () => {
         name={constants.itemsList}
         component={NewList}
         options={{
-          tabBarLabel: '',
-          tabBarIcon: ({ size, focused }) => (
-            <TabButton
-              size={size}
-              focused={focused}
-              label="Lista"
-              icon={faBasketShopping}
-            />
-          ),
+          tabBarLabel: 'Lista',
+          tabBarIcon: ({ size, color }) => {
+            return (
+              <FontAwesomeIcon
+                icon={faBasketShopping}
+                size={size}
+                color={color}
+              />
+            );
+          },
         }}
       />
       <Tab.Screen
         name={constants.itemsTaked}
-        component={ItemsTaked}
+        component={AddItem}
         options={{
           tabBarLabel: '',
           tabBarIcon: ({ size, focused }) => (
-            <TabButton
-              size={size}
-              focused={focused}
-              label="Pegos"
-              icon={faBagShopping}
-            />
+            <TabButton size={size} focused={focused} icon={faPlus} />
           ),
         }}
       />
@@ -72,13 +70,12 @@ const NewListBottomTab = () => {
         name={constants.addReceipt}
         component={AddReceipt}
         options={{
-          tabBarLabel: '',
-          tabBarIcon: ({ size, focused }) => (
-            <TabButton
-              size={size}
-              focused={focused}
-              label="Total"
+          tabBarLabel: 'Total',
+          tabBarIcon: ({ size, color }) => (
+            <FontAwesomeIcon
               icon={faHandHoldingDollar}
+              size={size}
+              color={color}
             />
           ),
         }}

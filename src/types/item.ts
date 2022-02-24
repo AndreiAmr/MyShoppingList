@@ -4,6 +4,8 @@ export interface ItemProps {
   note: string;
   price: number;
   quantity: number;
+  priorityLevel: number;
+  itemColor: string;
   createdAt: Date | string | null;
   updatedAt: Date | string | null;
   payedAt: Date | string | null;
