@@ -1,4 +1,4 @@
-export type ButtonColorProps = 'purple' | 'blue' | 'green';
+export type ButtonColorProps = 'purple' | 'blue' | 'green' | 'orange';
 
 export interface ButtonProps {
   color: ButtonColorProps;

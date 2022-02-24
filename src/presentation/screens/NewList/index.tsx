@@ -8,7 +8,7 @@ import Header from '../../components/Header';
 import Item from '../../components/Item';
 import ModalAddItem from '../../components/ModalAddItem';
 import ModalItem from '../../components/ModalItem';
-import ScreenTitle from '../../components/ScreenTitle';
+
 import * as S from './styles';
 
 const NewList = () => {
@@ -17,10 +17,6 @@ const NewList = () => {
   const [unpayedItems, setUnpayedItems] = useState<ItemProps[]>([]);
   const bottomSheetRef = useRef<Modalize>(null);
   const [itemDetails, setItemDetails] = useState<ModalItemProps>();
-
-  const handleOpenModal = () => {
-    setModalOpen(true);
-  };
 
   const handleCloseModal = () => {
     setModalOpen(false);
@@ -48,19 +44,24 @@ const NewList = () => {
   return (
     <S.Container>
       <Header goBackLabel="voltar" title="Nova Lista" />
-      <S.TitleContainer>
-        <ScreenTitle normal="Adicionar item," highlighted="Ver Lista" />
-        <S.SearchAndAddContainer>
-          <S.SearchInput
-            placeholderTextColor={theme.color.primary}
-            placeholder="Pesquise aqui"
-          />
-          <S.AddItemButton onPress={handleOpenModal}>
-            <S.AddItemButtonText>add. item </S.AddItemButtonText>
-          </S.AddItemButton>
-        </S.SearchAndAddContainer>
-      </S.TitleContainer>
-      <S.ItemsTitle>Itens na lista</S.ItemsTitle>
+      <S.SearchContainer>
+        <S.SearchInput
+          placeholder="Pesquisar por nome"
+          placeholderTextColor={theme.color.purple_dark}
+        />
+      </S.SearchContainer>
+
+      <S.FiltersContainer>
+        <S.FilterButton color="purple">
+          <S.FilterText>Prioridade</S.FilterText>
+        </S.FilterButton>
+        <S.FilterButton color="green">
+          <S.FilterText>Preço</S.FilterText>
+        </S.FilterButton>
+        <S.FilterButton color="orange">
+          <S.FilterText>Data de criação</S.FilterText>
+        </S.FilterButton>
+      </S.FiltersContainer>
 
       <S.ItemsContainer>
         {unpayedItems.map(item => (
