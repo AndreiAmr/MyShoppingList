@@ -7,7 +7,7 @@ import theme from '../../styles/theme';
 
 jest.mock('react-native-responsive-fontsize', () => {
   return {
-    RFValue: jest.fn(),
+    RFValue: jest.fn((size: number) => size),
   };
 });
 
