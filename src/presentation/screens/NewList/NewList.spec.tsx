@@ -5,6 +5,12 @@ import { ThemeProvider } from 'styled-components/native';
 import NewList from '.';
 import theme from '../../styles/theme';
 
+jest.mock('react-native-responsive-fontsize', () => {
+  return {
+    RFValue: jest.fn(),
+  };
+});
+
 jest.mock('react-native-responsive-screen', () => {
   return {
     heightPercentageToDP: jest.fn(() => 10),
