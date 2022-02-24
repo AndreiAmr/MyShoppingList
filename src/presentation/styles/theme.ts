@@ -1,6 +1,10 @@
 export default {
   color: {
     background: '#FFFFFF',
+    purple_light: '#C490E4',
+    purple_dark: '#AA4BE4',
+    green: '#7DD866',
+    blue: '#54BAB9',
     primary: '#6458A4',
     secondary: '#A174DA',
     button: '#E0E6F6',

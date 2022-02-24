@@ -39,7 +39,7 @@ const NewListBottomTab = () => {
       }}
     >
       <Tab.Screen
-        name={constants.newlist}
+        name={constants.itemsList}
         component={NewList}
         options={{
           tabBarLabel: '',
@@ -97,7 +97,7 @@ const Routes = () => {
       >
         <Stack.Screen component={Welcome} name={constants.welcome} />
         <Stack.Screen component={Home} name={constants.home} />
-        <Stack.Screen component={NewListBottomTab} name={constants.newlist} />
+        <Stack.Screen component={NewListBottomTab} name={constants.Items} />
       </Stack.Navigator>
     </NavigationContainer>
   );

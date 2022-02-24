@@ -4,36 +4,18 @@ import {
 } from 'react-native-responsive-screen';
 import styled from 'styled-components/native';
 
-interface GreetingProps {
-  highlighted: boolean;
-}
-
 export const Container = styled.View`
   flex: 1;
   background: ${({ theme }) => theme.color.background};
 `;
 
-export const GreetingsContainer = styled.View`
-  background: ${({ theme }) => theme.color.button_secondary};
-  padding-bottom: ${heightPercentageToDP(5)}px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-`;
-
-export const Greeting = styled.Text<GreetingProps>`
-  font-size: ${widthPercentageToDP(9)}px;
-  color: ${({ highlighted, theme }) =>
-    highlighted ? theme.color.primary : theme.color.text_header};
-  font-family: ${({ theme, highlighted }) =>
-    highlighted ? theme.fonts.bold : theme.fonts.medium};
-`;
-
 export const WishTodayText = styled.Text`
   font-size: ${widthPercentageToDP(6)}px;
-  color: ${({ theme }) => theme.color.text_header};
+  color: ${({ theme }) => theme.color.purple_dark};
   font-family: ${({ theme }) => theme.fonts.medium};
-  margin-top: ${heightPercentageToDP(7)}px;
+  margin-top: ${heightPercentageToDP(5)}px;
   margin-left: ${widthPercentageToDP(7)}px;
+  margin-bottom: ${heightPercentageToDP(8)}px;
 `;
 
 export const OptionButton = styled.TouchableOpacity`
