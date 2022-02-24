@@ -1,7 +1,6 @@
 export interface ItemProps {
   id?: string;
   name: string;
-  note: string;
   price: number;
   quantity: number;
   priorityLevel: number;
@@ -11,6 +10,9 @@ export interface ItemProps {
   payedAt: Date | string | null;
   takedAt: Date | string | null;
 }
+
+export type ItemColors = 'purple' | 'blue' | 'green' | 'yellow' | 'orange';
+
 export interface GetUntakedItemsProps {
   callback: (data: ItemProps[]) => void;
 }

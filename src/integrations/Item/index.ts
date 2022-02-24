@@ -6,7 +6,6 @@ import { GetUntakedItemsProps, ItemProps } from '../../types/item';
 
 export const createNewItem = async ({
   name,
-  note,
   quantity,
   price,
   createdAt,
@@ -21,7 +20,6 @@ export const createNewItem = async ({
       .doc(`${uuid.v1() as string}-${createdAt}`)
       .set({
         name,
-        note,
         price,
         quantity,
         createdAt,
@@ -37,41 +35,38 @@ export const createNewItem = async ({
   }
 };
 
-export const getUntakedItems = ({ callback }: GetUntakedItemsProps) => {
+export const getUntakedItems = ({}: GetUntakedItemsProps) => {
   try {
-    const userID = auth().currentUser?.uid;
-
-    firestore()
-      .collection(`${userID}`)
-      .onSnapshot(snapshot => {
-        const allList = snapshot.docs.map(doc => {
-          const {
-            createdAt,
-            name,
-            note,
-            payedAt,
-            price,
-            quantity,
-            takedAt,
-            updatedAt,
-          } = doc.data() as ItemProps;
-
-          return {
-            id: doc.id,
-            createdAt,
-            name,
-            note,
-            payedAt,
-            price,
-            quantity,
-            takedAt,
-            updatedAt,
-          };
-        }) as ItemProps[];
-
-        const data = allList.filter(item => item.takedAt === null);
-        callback(data as ItemProps[]);
-      });
+    // const userID = auth().currentUser?.uid;
+    // firestore();
+    // .collection(`${userID}`)
+    // .onSnapshot(snapshot => {
+    //   const allList = snapshot.docs.map(doc => {
+    //     const {
+    //       createdAt,
+    //       name,
+    //       note,
+    //       payedAt,
+    //       price,
+    //       quantity,
+    //       takedAt,
+    //       updatedAt,
+    //     } = doc.data() as any;
+    //     return {
+    //       id: doc.id,
+    //       createdAt,
+    //       name,
+    //       note,
+    //       payedAt,
+    //       price,
+    //       quantity,
+    //       takedAt,
+    //       updatedAt,
+    //     };
+    //   }) as ItemProps[];
+    //   const data = allList.filter(item => item.takedAt === null);
+    //   callback(data as ItemProps[]);
+    // });
   } catch (err) {
     return err;
   }

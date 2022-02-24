@@ -6,6 +6,7 @@ export default {
     green: '#7DD866',
     blue: '#54BAB9',
     orange: '#FF7878',
+    yellow: '#F4C552',
     disabled: '#86ABAB',
     primary: '#6458A4',
     secondary: '#A174DA',

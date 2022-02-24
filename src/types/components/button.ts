@@ -4,4 +4,5 @@ export interface ButtonProps {
   color: ButtonColorProps;
   onPress: () => void;
   label: string;
+  disabled?: boolean;
 }
