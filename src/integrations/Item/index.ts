@@ -35,38 +35,18 @@ export const createNewItem = async ({
   }
 };
 
-export const getUntakedItems = ({}: GetUntakedItemsProps) => {
+export const getUntakedItems = ({ callback }: GetUntakedItemsProps) => {
   try {
-    // const userID = auth().currentUser?.uid;
-    // firestore();
-    // .collection(`${userID}`)
-    // .onSnapshot(snapshot => {
-    //   const allList = snapshot.docs.map(doc => {
-    //     const {
-    //       createdAt,
-    //       name,
-    //       note,
-    //       payedAt,
-    //       price,
-    //       quantity,
-    //       takedAt,
-    //       updatedAt,
-    //     } = doc.data() as any;
-    //     return {
-    //       id: doc.id,
-    //       createdAt,
-    //       name,
-    //       note,
-    //       payedAt,
-    //       price,
-    //       quantity,
-    //       takedAt,
-    //       updatedAt,
-    //     };
-    //   }) as ItemProps[];
-    //   const data = allList.filter(item => item.takedAt === null);
-    //   callback(data as ItemProps[]);
-    // });
+    const userID = auth().currentUser?.uid;
+    firestore()
+      .collection(`${userID}`)
+      .onSnapshot(snapshot => {
+        const items: ItemProps[] = [];
+        snapshot.docs.map(item => {
+          items.push(item.data() as ItemProps);
+        });
+        callback(items);
+      });
   } catch (err) {
     return err;
   }

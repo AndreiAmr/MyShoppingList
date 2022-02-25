@@ -1,18 +1,21 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTheme } from 'styled-components/native';
 import { createNewItem } from '../../../integrations/Item';
 import { ItemProps } from '../../../types/item';
 import Button from '../../components/Button';
 import Header from '../../components/Header';
+import constants from '../../routes/constants';
 import * as S from './styles';
 
 const AddItem = () => {
+  const navigation = useNavigation();
   const theme = useTheme();
   const [name, setName] = useState<string>('');
   const [priorityLevel, setPriorityLevel] = useState<number>();
   const [price, setPrice] = useState<number>(0);
   const [itemColor, setItemColor] = useState<string>('');
-  const [quantity, setQuantity] = useState<number>();
+  const [quantity, setQuantity] = useState<number>(0);
   const [submitButtonDisabled, setSubmitButtonDisabled] =
     useState<boolean>(true);
 
@@ -39,6 +42,14 @@ const AddItem = () => {
     [],
   );
 
+  const handleEmptyForm = () => {
+    setName('');
+    setItemColor('');
+    setPrice(0);
+    setPriorityLevel(undefined);
+    setQuantity(0);
+  };
+
   const handleSubmitButton = () => {
     createNewItem({
       name,
@@ -48,6 +59,8 @@ const AddItem = () => {
       quantity,
       createdAt: new Date().toISOString(),
     } as ItemProps);
+    navigation.navigate(constants.itemsList);
+    handleEmptyForm();
   };
 
   useEffect(() => {
