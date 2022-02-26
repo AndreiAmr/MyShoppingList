@@ -19,14 +19,16 @@ export interface GetUntakedItemsProps {
 
 export interface ItemComponentProps {
   name: string;
-  note: string;
   quantity: number;
-  onPress: () => void;
+  priorityLevel: number;
+  itemColor: string;
+  price: number;
+  id: string;
+  onDelete: (id: string) => void;
 }
 
 export interface ModalItemProps {
   name: string;
   quantity?: number;
   price?: number;
-  note: string;
 }

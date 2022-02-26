@@ -3,6 +3,7 @@ import auth from '@react-native-firebase/auth';
 import uuid from 'react-native-uuid';
 
 import { GetUntakedItemsProps, ItemProps } from '../../types/item';
+const userID = auth().currentUser?.uid;
 
 export const createNewItem = async ({
   name,
@@ -37,17 +38,28 @@ export const createNewItem = async ({
 
 export const getUntakedItems = ({ callback }: GetUntakedItemsProps) => {
   try {
-    const userID = auth().currentUser?.uid;
     firestore()
       .collection(`${userID}`)
       .onSnapshot(snapshot => {
         const items: ItemProps[] = [];
         snapshot.docs.map(item => {
-          items.push(item.data() as ItemProps);
+          items.push({
+            id: item.id,
+            ...(item.data() as ItemProps),
+          });
         });
         callback(items);
       });
   } catch (err) {
+    return err;
+  }
+};
+
+export const handleDeleteItem = (id: string) => {
+  try {
+    firestore().collection(`${userID}`).doc(id).delete();
+  } catch (err) {
+    console.log(err);
     return err;
   }
 };

@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Modal } from 'react-native';
+import { Modal, Text } from 'react-native';
 import { Modalize } from 'react-native-modalize';
 import { useTheme } from 'styled-components/native';
-import { getUntakedItems } from '../../../integrations/Item';
+import { getUntakedItems, handleDeleteItem } from '../../../integrations/Item';
 import { ItemProps, ModalItemProps } from '../../../types/item';
 import Header from '../../components/Header';
 import Item from '../../components/Item';
@@ -33,13 +33,33 @@ const NewList = () => {
     });
   }, []);
 
-  const handleSetItemDetails = (props: ModalItemProps) => {
-    setItemDetails(props);
-    bottomSheetRef.current?.open();
-  };
-
   const handleChangeActiveFilter = (filterName: string) => {
     setActiveFilter(filterName);
+  };
+
+  const handleDeleteIcon = (id: string) => {
+    handleDeleteItem(id);
+    // setUnpayedItems(() => unpayedItems.filter(item => item.id !== id));
+  };
+
+  const renderItems = () => {
+    const items: JSX.Element[] = [];
+    unpayedItems.forEach(item => {
+      items.push(
+        <Item
+          key={item.id}
+          id={item.id as string}
+          onDelete={handleDeleteIcon}
+          name={item.name}
+          itemColor={item.itemColor}
+          price={item.price}
+          priorityLevel={item.priorityLevel}
+          quantity={item.quantity}
+        />,
+      );
+    });
+
+    return items;
   };
 
   useEffect(() => {
@@ -80,19 +100,7 @@ const NewList = () => {
         </S.FilterButton>
       </S.FiltersContainer>
 
-      <S.ItemsContainer>
-        {unpayedItems.map(item => (
-          <Item
-            key={item.id}
-            name={item.name}
-            note={item.note}
-            quantity={item.quantity}
-            onPress={() => {
-              handleSetItemDetails(item);
-            }}
-          />
-        ))}
-      </S.ItemsContainer>
+      <S.ItemsContainer>{renderItems()}</S.ItemsContainer>
 
       <Modal
         transparent
@@ -102,14 +110,6 @@ const NewList = () => {
       >
         <ModalAddItem handleCloseModal={handleCloseModal} />
       </Modal>
-      <Modalize ref={bottomSheetRef} adjustToContentHeight>
-        <ModalItem
-          name={itemDetails?.name || ''}
-          note={itemDetails?.note || ''}
-          price={itemDetails?.price}
-          quantity={itemDetails?.quantity}
-        />
-      </Modalize>
     </S.Container>
   );
 };
