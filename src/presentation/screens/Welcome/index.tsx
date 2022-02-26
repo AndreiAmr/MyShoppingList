@@ -25,7 +25,7 @@ const Welcome = () => {
     <S.Container>
       <StatusBar
         translucent
-        backgroundColor={theme.color.background}
+        backgroundColor={theme.color.light}
         barStyle={'dark-content'}
       />
       <S.Image />
