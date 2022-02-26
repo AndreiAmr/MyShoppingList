@@ -4,13 +4,17 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 
 interface ContainerProps {
   itemColor: string;
 }
 interface PriorityLevelTextProps {
   itemColor: string;
+}
+
+interface IconContainerProps {
+  left?: boolean;
 }
 
 export const Wrapper = styled(Animated.View)``;
@@ -80,13 +84,21 @@ export const Price = styled.Text`
   margin-right: ${RFValue(9)}px;
 `;
 
-export const IconDeleteContainer = styled(Animated.View)`
+export const IconContainer = styled(Animated.View)<IconContainerProps>`
   height: ${heightPercentageToDP(10)}px;
   width: ${heightPercentageToDP(10)}px;
   position: absolute;
-  right: 10%;
 
   justify-content: center;
   align-items: center;
   z-index: -1;
+
+  ${({ left }) =>
+    left
+      ? css`
+          left: 7%;
+        `
+      : css`
+          right: 7%;
+        `}
 `;

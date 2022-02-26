@@ -1,7 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Modal } from 'react-native';
 import { useTheme } from 'styled-components/native';
-import { getUntakedItems, handleDeleteItem } from '../../../integrations/Item';
+import {
+  getUntakedItems,
+  handleDeleteItem,
+  handleTakeItem,
+} from '../../../integrations/Item';
 import { ItemProps } from '../../../types/item';
 import Header from '../../components/Header';
 import Item from '../../components/Item';
@@ -34,11 +38,6 @@ const NewList = () => {
     setActiveFilter(filterName);
   };
 
-  const handleDeleteIcon = (id: string) => {
-    handleDeleteItem(id);
-    // setUnpayedItems(() => unpayedItems.filter(item => item.id !== id));
-  };
-
   const renderItems = () => {
     const items: JSX.Element[] = [];
     unpayedItems.forEach(item => {
@@ -46,12 +45,13 @@ const NewList = () => {
         <Item
           key={item.id}
           id={item.id as string}
-          onDelete={handleDeleteIcon}
+          onDelete={handleDeleteItem}
           name={item.name}
           itemColor={item.itemColor}
           price={item.price}
           priorityLevel={item.priorityLevel}
           quantity={item.quantity}
+          onTake={handleTakeItem}
         />,
       );
     });

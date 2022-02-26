@@ -49,7 +49,7 @@ export const getUntakedItems = ({ callback }: GetUntakedItemsProps) => {
             ...(item.data() as ItemProps),
           });
         });
-        callback(items);
+        callback(items.filter(item => item.takedAt === null));
       });
   } catch (err) {
     return err;
@@ -57,10 +57,22 @@ export const getUntakedItems = ({ callback }: GetUntakedItemsProps) => {
 };
 
 export const handleDeleteItem = (id: string) => {
+  const userID = auth().currentUser?.uid;
+
   try {
     firestore().collection(`${userID}`).doc(id).delete();
   } catch (err) {
-    console.log(err);
+    return err;
+  }
+};
+
+export const handleTakeItem = (id: string) => {
+  const userID = auth().currentUser?.uid;
+  try {
+    firestore().collection(`${userID}`).doc(id).update({
+      takedAt: new Date().toISOString(),
+    });
+  } catch (err) {
     return err;
   }
 };

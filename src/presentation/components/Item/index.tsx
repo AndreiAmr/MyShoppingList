@@ -1,4 +1,4 @@
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import React from 'react';
 import { Dimensions } from 'react-native';
@@ -15,6 +15,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { heightPercentageToDP } from 'react-native-responsive-screen';
+import { useTheme } from 'styled-components';
 
 import { ItemComponentProps } from '../../../types/item';
 import * as S from './styles';
@@ -29,9 +30,13 @@ const Item = ({
   price,
   onDelete,
   id,
+  onTake,
 }: ItemComponentProps) => {
+  const theme = useTheme();
   const translateX = useSharedValue(0);
-  const TRANSLATED_X_TRESHOLD = -screenWidth * 0.2;
+  const TRANSLATED_X_DELETE_TRESHOLD = -screenWidth * 0.2;
+  const TRANSLATED_X_ADD_TRESHOLD = screenWidth * 0.2;
+
   const itemHeight = useSharedValue(heightPercentageToDP(10));
   const itemOpacity = useSharedValue(1);
   const itemMargin = useSharedValue(heightPercentageToDP(1));
@@ -41,7 +46,7 @@ const Item = ({
       translateX.value = event.translationX;
     },
     onEnd: () => {
-      if (translateX.value < TRANSLATED_X_TRESHOLD) {
+      if (translateX.value < TRANSLATED_X_DELETE_TRESHOLD) {
         translateX.value = withTiming(-screenWidth);
         itemHeight.value = withTiming(0);
         itemOpacity.value = withTiming(0);
@@ -49,7 +54,15 @@ const Item = ({
           if (isFinished) {
             runOnJS(onDelete)(id);
           }
-          console.log(isFinished);
+        });
+      } else if (translateX.value > TRANSLATED_X_ADD_TRESHOLD) {
+        translateX.value = withTiming(screenWidth);
+        itemHeight.value = withTiming(0);
+        itemOpacity.value = withTiming(0);
+        itemMargin.value = withTiming(0, undefined, isFinished => {
+          if (isFinished) {
+            runOnJS(onTake)(id);
+          }
         });
       } else {
         translateX.value = withTiming(0);
@@ -58,7 +71,13 @@ const Item = ({
   });
 
   const reanimatedDeleteIconStyle = useAnimatedStyle(() => ({
-    opacity: withTiming(translateX.value < TRANSLATED_X_TRESHOLD ? 1 : 0),
+    opacity: withTiming(
+      translateX.value < TRANSLATED_X_DELETE_TRESHOLD ? 1 : 0,
+    ),
+  }));
+
+  const reanimatedAddIconStyle = useAnimatedStyle(() => ({
+    opacity: withTiming(translateX.value > TRANSLATED_X_ADD_TRESHOLD ? 1 : 0),
   }));
 
   const reanimatedStyle = useAnimatedStyle(() => ({
@@ -73,6 +92,13 @@ const Item = ({
 
   return (
     <S.Wrapper style={reanimatedViewStyle}>
+      <S.IconContainer style={reanimatedAddIconStyle} left>
+        <FontAwesomeIcon
+          icon={faCartShopping}
+          color={theme.color.blue}
+          size={RFValue(20)}
+        />
+      </S.IconContainer>
       <PanGestureHandler onGestureEvent={panGesture}>
         <Animated.View style={reanimatedStyle}>
           <S.Container itemColor={itemColor}>
@@ -92,9 +118,13 @@ const Item = ({
           </S.Container>
         </Animated.View>
       </PanGestureHandler>
-      <S.IconDeleteContainer style={reanimatedDeleteIconStyle}>
-        <FontAwesomeIcon icon={faTrash} color={itemColor} size={RFValue(20)} />
-      </S.IconDeleteContainer>
+      <S.IconContainer style={reanimatedDeleteIconStyle}>
+        <FontAwesomeIcon
+          icon={faTrash}
+          color={theme.color.orange}
+          size={RFValue(20)}
+        />
+      </S.IconContainer>
     </S.Wrapper>
   );
 };

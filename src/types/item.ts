@@ -25,6 +25,7 @@ export interface ItemComponentProps {
   price: number;
   id: string;
   onDelete: (id: string) => void;
+  onTake: (id: string) => void;
 }
 
 export interface ModalItemProps {

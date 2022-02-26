@@ -5,6 +5,6 @@ export const getUserName = () => {
     const userName = auth().currentUser?.displayName as string;
     return userName;
   } catch (err) {
-    console.log(err);
+    return err;
   }
 };

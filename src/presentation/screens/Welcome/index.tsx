@@ -17,7 +17,7 @@ const Welcome = () => {
       await auth().signInWithCredential(googleCredential);
       navigation.navigate(constants.home);
     } catch (err) {
-      console.log(err);
+      return err;
     }
   };
 
