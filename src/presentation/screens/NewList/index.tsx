@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Modal } from 'react-native';
+
 import { useTheme } from 'styled-components/native';
 import {
   getUntakedItems,
@@ -9,20 +9,15 @@ import {
 import { ItemProps } from '../../../types/item';
 import Header from '../../components/Header';
 import Item from '../../components/Item';
-import ModalAddItem from '../../components/ModalAddItem';
 
 import * as S from './styles';
 
 const NewList = () => {
   const theme = useTheme();
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
   const [unpayedItems, setUnpayedItems] = useState<ItemProps[]>([]);
 
   const [activeFilter, setActiveFilter] = useState<string>();
-
-  const handleCloseModal = () => {
-    setModalOpen(false);
-  };
 
   const handleChangeUnpayedItems = (data: ItemProps[]) => {
     setUnpayedItems(data);
@@ -98,15 +93,6 @@ const NewList = () => {
       </S.FiltersContainer>
 
       <S.ItemsContainer>{renderItems()}</S.ItemsContainer>
-
-      <Modal
-        transparent
-        visible={modalOpen}
-        animationType="fade"
-        onRequestClose={handleCloseModal}
-      >
-        <ModalAddItem handleCloseModal={handleCloseModal} />
-      </Modal>
     </S.Container>
   );
 };
