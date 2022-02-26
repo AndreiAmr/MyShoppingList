@@ -30,6 +30,12 @@ jest.mock('@fortawesome/react-native-fontawesome', () => {
   };
 });
 
+jest.mock('react-native-reanimated', () => {
+  return {
+    View: '',
+  };
+});
+
 jest.mock('@react-native-firebase/firestore', () => {});
 jest.mock('@react-native-firebase/auth', () => {});
 

@@ -1,13 +1,11 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Modal, Text } from 'react-native';
-import { Modalize } from 'react-native-modalize';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Modal } from 'react-native';
 import { useTheme } from 'styled-components/native';
 import { getUntakedItems, handleDeleteItem } from '../../../integrations/Item';
-import { ItemProps, ModalItemProps } from '../../../types/item';
+import { ItemProps } from '../../../types/item';
 import Header from '../../components/Header';
 import Item from '../../components/Item';
 import ModalAddItem from '../../components/ModalAddItem';
-import ModalItem from '../../components/ModalItem';
 
 import * as S from './styles';
 
@@ -15,8 +13,7 @@ const NewList = () => {
   const theme = useTheme();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [unpayedItems, setUnpayedItems] = useState<ItemProps[]>([]);
-  const bottomSheetRef = useRef<Modalize>(null);
-  const [itemDetails, setItemDetails] = useState<ModalItemProps>();
+
   const [activeFilter, setActiveFilter] = useState<string>();
 
   const handleCloseModal = () => {
