@@ -64,7 +64,7 @@ const NewList = () => {
       <S.SearchContainer>
         <S.SearchInput
           placeholder="Pesquisar por nome"
-          placeholderTextColor={theme.color.purple_dark}
+          placeholderTextColor={theme.color.purple_light}
         />
       </S.SearchContainer>
 
@@ -92,7 +92,13 @@ const NewList = () => {
         </S.FilterButton>
       </S.FiltersContainer>
 
-      <S.ItemsContainer>{renderItems()}</S.ItemsContainer>
+      {unpayedItems.length === 0 ? (
+        <S.NoItems>
+          Adicione itens à sua lista de compras para ve-los aqui!
+        </S.NoItems>
+      ) : (
+        <S.ItemsContainer>{renderItems()}</S.ItemsContainer>
+      )}
     </S.Container>
   );
 };

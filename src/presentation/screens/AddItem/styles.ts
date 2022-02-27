@@ -16,6 +16,9 @@ interface ItemColorProps {
   active: boolean;
 }
 
+interface PlaceholderProps {
+  placeholderColor?: boolean;
+}
 export const Container = styled.ScrollView`
   flex: 1;
   background: ${({ theme }) => theme.color.background};
@@ -37,14 +40,14 @@ export const Label = styled.Text`
 export const NameInput = styled.TextInput`
   height: ${heightPercentageToDP(6)}px;
   border-radius: ${heightPercentageToDP(10)}px;
-  border: ${RFValue(1)}px solid ${({ theme }) => theme.color.purple_dark};
-
+  background-color: ${({ theme }) => theme.color.light};
   margin: ${RFValue(8)}px ${widthPercentageToDP(7)}px
     ${heightPercentageToDP(4)}px;
 
   font-size: ${RFValue(17)}px;
   font-family: ${({ theme }) => theme.fonts.medium};
   color: ${({ theme }) => theme.color.purple_dark};
+  elevation: 6;
   text-align: center;
 `;
 
@@ -69,6 +72,7 @@ export const PriorityButton = styled.TouchableOpacity<PriorityLevelProps>`
     active &&
     css`
       background: ${({ theme }) => theme.color.purple_dark};
+      elevation: 7;
     `}
 `;
 
@@ -78,20 +82,22 @@ export const PriotyText = styled.Text`
   font-family: ${({ theme }) => theme.fonts.medium};
 `;
 
-export const PriceTextInput = styled(CurrencyInput)`
+export const PriceTextInput = styled(CurrencyInput)<PlaceholderProps>`
   width: ${widthPercentageToDP(45)}px;
   height: ${heightPercentageToDP(6)}px;
   border-radius: ${heightPercentageToDP(10)}px;
-  border: 1px solid ${({ theme }) => theme.color.purple_dark};
+  background: ${({ theme }) => theme.color.light};
   margin-left: ${widthPercentageToDP(7)}px;
 
-  color: ${({ theme }) => theme.color.purple_dark};
+  color: ${({ theme, placeholderColor }) =>
+    placeholderColor ? theme.color.disabled : theme.color.purple_dark};
   font-family: ${({ theme }) => theme.fonts.medium};
   font-size: ${RFValue(17)}px;
 
   text-align: center;
   margin-top: ${RFValue(14)}px;
   margin-bottom: ${RFValue(31)}px;
+  elevation: 6;
 `;
 
 export const ItemColorContainer = styled.View`
@@ -108,18 +114,21 @@ export const ItemColor = styled.TouchableOpacity<ItemColorProps>`
     color === 'purple' &&
     css`
       background: ${({ theme }) => theme.color.purple_light};
+      elevation: 8;
     `}
   ${({ color, active }) =>
     color === 'purple' &&
     !active &&
     css`
       background: ${({ theme }) => theme.color.purple_light}70;
+      elevation: 0;
     `}
 
   ${({ color }) =>
     color === 'blue' &&
     css`
       background: ${({ theme }) => theme.color.blue};
+      elevation: 8;
     `}
 
     ${({ color, active }) =>
@@ -127,12 +136,14 @@ export const ItemColor = styled.TouchableOpacity<ItemColorProps>`
     !active &&
     css`
       background: ${({ theme }) => theme.color.blue}70;
+      elevation: 0;
     `}
     
     ${({ color }) =>
     color === 'green' &&
     css`
       background: ${({ theme }) => theme.color.green};
+      elevation: 8;
     `}
        
     ${({ color, active }) =>
@@ -140,12 +151,14 @@ export const ItemColor = styled.TouchableOpacity<ItemColorProps>`
     !active &&
     css`
       background: ${({ theme }) => theme.color.green}70;
+      elevation: 0;
     `}
 
     ${({ color }) =>
     color === 'orange' &&
     css`
       background: ${({ theme }) => theme.color.orange};
+      elevation: 8;
     `}
 
     ${({ color, active }) =>
@@ -153,12 +166,14 @@ export const ItemColor = styled.TouchableOpacity<ItemColorProps>`
     !active &&
     css`
       background: ${({ theme }) => theme.color.orange}70;
+      elevation: 0;
     `}
 
     ${({ color }) =>
     color === 'yellow' &&
     css`
       background: ${({ theme }) => theme.color.yellow};
+      elevation: 8;
     `}
 
     ${({ color, active }) =>
@@ -166,21 +181,24 @@ export const ItemColor = styled.TouchableOpacity<ItemColorProps>`
     !active &&
     css`
       background: ${({ theme }) => theme.color.yellow}70;
+      elevation: 0;
     `}
 `;
 
-export const QuantityInput = styled.TextInput`
+export const QuantityInput = styled.TextInput<PlaceholderProps>`
   width: ${widthPercentageToDP(40)}px;
   height: ${heightPercentageToDP(6)}px;
   border-radius: ${heightPercentageToDP(10)}px;
   margin-left: ${widthPercentageToDP(7)}px;
 
-  color: ${({ theme }) => theme.color.purple_dark};
+  color: ${({ theme, placeholderColor }) =>
+    placeholderColor ? theme.color.disabled : theme.color.purple_dark};
   font-family: ${({ theme }) => theme.fonts.medium};
   font-size: ${RFValue(17)}px;
 
   text-align: center;
-  border: 1px solid ${({ theme }) => theme.color.purple_dark};
+  background: ${({ theme }) => theme.color.light};
   margin-top: ${RFValue(14)}px;
   margin-bottom: ${RFValue(31)}px;
+  elevation: 6;
 `;

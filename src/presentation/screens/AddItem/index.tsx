@@ -91,6 +91,7 @@ const AddItem = () => {
           placeholder="Ex: Pacote de macarrão"
           value={name}
           onChangeText={handleChangeName}
+          placeholderTextColor={theme.color.disabled}
         />
 
         <S.Label>Nivel de prioridade</S.Label>
@@ -132,6 +133,7 @@ const AddItem = () => {
           prefix="R$ "
           value={price}
           onChangeValue={text => handleChangePrice(Number(text))}
+          placeholderColor={price === 0}
         />
 
         <S.Label>Quantidade</S.Label>
@@ -140,6 +142,7 @@ const AddItem = () => {
           placeholder="Ex: 4"
           onChangeText={value => setQuantity(Number(value))}
           value={String(quantity)}
+          placeholderColor={quantity === 0}
         />
         <S.Label>Cor do item</S.Label>
         <S.ItemColorContainer>

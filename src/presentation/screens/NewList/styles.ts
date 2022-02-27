@@ -1,4 +1,7 @@
-import { heightPercentageToDP } from 'react-native-responsive-screen';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 import styled, { css } from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { ButtonColorProps } from '../../../types/components/button';
@@ -16,7 +19,6 @@ export const Container = styled.View`
 export const SearchContainer = styled.View`
   width: 100%;
   padding: ${RFValue(10)}px 0;
-  background: ${({ theme }) => theme.color.purple_light};
 `;
 
 export const SearchInput = styled.TextInput`
@@ -30,12 +32,14 @@ export const SearchInput = styled.TextInput`
   color: ${({ theme }) => theme.color.purple_light};
   text-align: center;
   font-size: ${RFValue(15)}px;
+
+  elevation: 10;
 `;
 
 export const FiltersContainer = styled.View`
   flex-direction: row;
   justify-content: space-evenly;
-  margin: ${RFValue(10)}px;
+  margin: ${RFValue(10)}px ${RFValue(10)}px ${RFValue(40)}px;
 `;
 
 export const FilterButton = styled.TouchableOpacity<FilterButtonProps>`
@@ -88,4 +92,13 @@ export const FilterText = styled.Text`
   font-family: ${({ theme }) => theme.fonts.medium};
   font-size: ${RFValue(14)}px;
 `;
+
+export const NoItems = styled.Text`
+  font-family: ${({ theme }) => theme.fonts.medium};
+  font-size: ${RFValue(20)}px;
+  margin: ${RFValue(116)}px ${widthPercentageToDP(10)}px;
+  text-align: center;
+  color: ${({ theme }) => theme.color.disabled};
+`;
+
 export const ItemsContainer = styled.ScrollView``;
