@@ -5,6 +5,7 @@ import {
 import styled, { css } from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { ButtonColorProps } from '../../../types/components/button';
+import { ScrollView } from 'react-native-gesture-handler';
 
 interface FilterButtonProps {
   color: ButtonColorProps;
@@ -19,6 +20,7 @@ export const Container = styled.View`
 export const SearchContainer = styled.View`
   width: 100%;
   padding: ${RFValue(10)}px 0;
+  margin-top: ${RFValue(10)}px;
 `;
 
 export const SearchInput = styled.TextInput`
@@ -101,4 +103,6 @@ export const NoItems = styled.Text`
   color: ${({ theme }) => theme.color.disabled};
 `;
 
-export const ItemsContainer = styled.ScrollView``;
+export const ItemsContainer = styled(ScrollView)`
+  flex: 1;
+`;

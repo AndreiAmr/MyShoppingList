@@ -12,7 +12,7 @@ import { heightPercentageToDP } from 'react-native-responsive-screen';
 import { useTheme } from 'styled-components';
 import TabButton from '../components/TabButton';
 import AddItem from '../screens/AddItem';
-import AddReceipt from '../screens/AddReceipt';
+import Total from '../screens/Total';
 import Home from '../screens/Home';
 
 import NewList from '../screens/NewList';
@@ -68,7 +68,7 @@ const NewListBottomTab = () => {
       />
       <Tab.Screen
         name={constants.addReceipt}
-        component={AddReceipt}
+        component={Total}
         options={{
           tabBarLabel: 'Total',
           tabBarIcon: ({ size, color }) => (
