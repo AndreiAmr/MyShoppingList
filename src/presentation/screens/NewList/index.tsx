@@ -1,30 +1,23 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Modal } from 'react-native';
-import { Modalize } from 'react-native-modalize';
+import React, { useCallback, useEffect, useState } from 'react';
+
 import { useTheme } from 'styled-components/native';
-import { getUntakedItems } from '../../../integrations/Item';
-import { ItemProps, ModalItemProps } from '../../../types/item';
+import {
+  getUntakedItems,
+  handleDeleteItem,
+  handleTakeItem,
+} from '../../../integrations/Item';
+import { ItemProps } from '../../../types/item';
 import Header from '../../components/Header';
 import Item from '../../components/Item';
-import ModalAddItem from '../../components/ModalAddItem';
-import ModalItem from '../../components/ModalItem';
-import ScreenTitle from '../../components/ScreenTitle';
+
 import * as S from './styles';
 
 const NewList = () => {
   const theme = useTheme();
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
   const [unpayedItems, setUnpayedItems] = useState<ItemProps[]>([]);
-  const bottomSheetRef = useRef<Modalize>(null);
-  const [itemDetails, setItemDetails] = useState<ModalItemProps>();
 
-  const handleOpenModal = () => {
-    setModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalOpen(false);
-  };
+  const [activeFilter, setActiveFilter] = useState<string>();
 
   const handleChangeUnpayedItems = (data: ItemProps[]) => {
     setUnpayedItems(data);
@@ -36,9 +29,29 @@ const NewList = () => {
     });
   }, []);
 
-  const handleSetItemDetails = (props: ModalItemProps) => {
-    setItemDetails(props);
-    bottomSheetRef.current?.open();
+  const handleChangeActiveFilter = (filterName: string) => {
+    setActiveFilter(filterName);
+  };
+
+  const renderItems = () => {
+    const items: JSX.Element[] = [];
+    unpayedItems.forEach(item => {
+      items.push(
+        <Item
+          key={item.id}
+          id={item.id as string}
+          onDelete={handleDeleteItem}
+          name={item.name}
+          itemColor={item.itemColor}
+          price={item.price}
+          priorityLevel={item.priorityLevel}
+          quantity={item.quantity}
+          onTake={handleTakeItem}
+        />,
+      );
+    });
+
+    return items;
   };
 
   useEffect(() => {
@@ -48,50 +61,44 @@ const NewList = () => {
   return (
     <S.Container>
       <Header goBackLabel="voltar" title="Nova Lista" />
-      <S.TitleContainer>
-        <ScreenTitle normal="Adicionar item," highlighted="Ver Lista" />
-        <S.SearchAndAddContainer>
-          <S.SearchInput
-            placeholderTextColor={theme.color.primary}
-            placeholder="Pesquise aqui"
-          />
-          <S.AddItemButton onPress={handleOpenModal}>
-            <S.AddItemButtonText>add. item </S.AddItemButtonText>
-          </S.AddItemButton>
-        </S.SearchAndAddContainer>
-      </S.TitleContainer>
-      <S.ItemsTitle>Itens na lista</S.ItemsTitle>
-
-      <S.ItemsContainer>
-        {unpayedItems.map(item => (
-          <Item
-            key={item.id}
-            name={item.name}
-            note={item.note}
-            quantity={item.quantity}
-            onPress={() => {
-              handleSetItemDetails(item);
-            }}
-          />
-        ))}
-      </S.ItemsContainer>
-
-      <Modal
-        transparent
-        visible={modalOpen}
-        animationType="fade"
-        onRequestClose={handleCloseModal}
-      >
-        <ModalAddItem handleCloseModal={handleCloseModal} />
-      </Modal>
-      <Modalize ref={bottomSheetRef} adjustToContentHeight>
-        <ModalItem
-          name={itemDetails?.name || ''}
-          note={itemDetails?.note || ''}
-          price={itemDetails?.price}
-          quantity={itemDetails?.quantity}
+      <S.SearchContainer>
+        <S.SearchInput
+          placeholder="Pesquisar por nome"
+          placeholderTextColor={theme.color.purple_light}
         />
-      </Modalize>
+      </S.SearchContainer>
+
+      <S.FiltersContainer>
+        <S.FilterButton
+          onPress={() => handleChangeActiveFilter('purple')}
+          active={activeFilter === 'purple'}
+          color="purple"
+        >
+          <S.FilterText>Prioridade</S.FilterText>
+        </S.FilterButton>
+        <S.FilterButton
+          onPress={() => handleChangeActiveFilter('green')}
+          active={activeFilter === 'green'}
+          color="green"
+        >
+          <S.FilterText>Preço</S.FilterText>
+        </S.FilterButton>
+        <S.FilterButton
+          onPress={() => handleChangeActiveFilter('orange')}
+          active={activeFilter === 'orange'}
+          color="orange"
+        >
+          <S.FilterText>Data de criação</S.FilterText>
+        </S.FilterButton>
+      </S.FiltersContainer>
+
+      {unpayedItems.length === 0 ? (
+        <S.NoItems>
+          Adicione itens à sua lista de compras para ve-los aqui!
+        </S.NoItems>
+      ) : (
+        <S.ItemsContainer>{renderItems()}</S.ItemsContainer>
+      )}
     </S.Container>
   );
 };

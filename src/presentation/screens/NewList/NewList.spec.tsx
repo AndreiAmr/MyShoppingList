@@ -5,6 +5,12 @@ import { ThemeProvider } from 'styled-components/native';
 import NewList from '.';
 import theme from '../../styles/theme';
 
+jest.mock('react-native-responsive-fontsize', () => {
+  return {
+    RFValue: jest.fn((size: number) => size),
+  };
+});
+
 jest.mock('react-native-responsive-screen', () => {
   return {
     heightPercentageToDP: jest.fn(() => 10),
@@ -21,6 +27,14 @@ jest.mock('@react-navigation/native', () => {
 jest.mock('@fortawesome/react-native-fontawesome', () => {
   return {
     FontAwesomeIcon: '',
+  };
+});
+
+jest.mock('react-native-gesture-handler', () => {});
+
+jest.mock('react-native-reanimated', () => {
+  return {
+    View: '',
   };
 });
 

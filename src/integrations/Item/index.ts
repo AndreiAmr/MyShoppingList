@@ -6,10 +6,11 @@ import { GetUntakedItemsProps, ItemProps } from '../../types/item';
 
 export const createNewItem = async ({
   name,
-  note,
   quantity,
   price,
   createdAt,
+  priorityLevel,
+  itemColor,
 }: ItemProps) => {
   try {
     const userId = auth().currentUser?.uid;
@@ -19,10 +20,11 @@ export const createNewItem = async ({
       .doc(`${uuid.v1() as string}-${createdAt}`)
       .set({
         name,
-        note,
         price,
         quantity,
         createdAt,
+        priorityLevel,
+        itemColor,
         payedAt: null,
         updatedAt: null,
         takedAt: null,
@@ -40,34 +42,36 @@ export const getUntakedItems = ({ callback }: GetUntakedItemsProps) => {
     firestore()
       .collection(`${userID}`)
       .onSnapshot(snapshot => {
-        const allList = snapshot.docs.map(doc => {
-          const {
-            createdAt,
-            name,
-            note,
-            payedAt,
-            price,
-            quantity,
-            takedAt,
-            updatedAt,
-          } = doc.data() as ItemProps;
-
-          return {
-            id: doc.id,
-            createdAt,
-            name,
-            note,
-            payedAt,
-            price,
-            quantity,
-            takedAt,
-            updatedAt,
-          };
-        }) as ItemProps[];
-
-        const data = allList.filter(item => item.takedAt === null);
-        callback(data as ItemProps[]);
+        const items: ItemProps[] = [];
+        snapshot.docs.map(item => {
+          items.push({
+            id: item.id,
+            ...(item.data() as ItemProps),
+          });
+        });
+        callback(items.filter(item => item.takedAt === null));
       });
+  } catch (err) {
+    return err;
+  }
+};
+
+export const handleDeleteItem = (id: string) => {
+  const userID = auth().currentUser?.uid;
+
+  try {
+    firestore().collection(`${userID}`).doc(id).delete();
+  } catch (err) {
+    return err;
+  }
+};
+
+export const handleTakeItem = (id: string) => {
+  const userID = auth().currentUser?.uid;
+  try {
+    firestore().collection(`${userID}`).doc(id).update({
+      takedAt: new Date().toISOString(),
+    });
   } catch (err) {
     return err;
   }

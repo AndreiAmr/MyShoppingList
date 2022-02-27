@@ -1,28 +1,35 @@
 export interface ItemProps {
   id?: string;
   name: string;
-  note: string;
   price: number;
   quantity: number;
+  priorityLevel: number;
+  itemColor: string;
   createdAt: Date | string | null;
   updatedAt: Date | string | null;
   payedAt: Date | string | null;
   takedAt: Date | string | null;
 }
+
+export type ItemColors = 'purple' | 'blue' | 'green' | 'yellow' | 'orange';
+
 export interface GetUntakedItemsProps {
   callback: (data: ItemProps[]) => void;
 }
 
 export interface ItemComponentProps {
   name: string;
-  note: string;
   quantity: number;
-  onPress: () => void;
+  priorityLevel: number;
+  itemColor: string;
+  price: number;
+  id: string;
+  onDelete: (id: string) => void;
+  onTake: (id: string) => void;
 }
 
 export interface ModalItemProps {
   name: string;
   quantity?: number;
   price?: number;
-  note: string;
 }

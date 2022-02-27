@@ -8,6 +8,7 @@ import { RFValue } from 'react-native-responsive-fontsize';
 
 interface ContainerProps {
   color: ButtonColorProps;
+  disabled?: boolean;
 }
 
 export const Container = styled.TouchableOpacity<ContainerProps>`
@@ -35,6 +36,12 @@ export const Container = styled.TouchableOpacity<ContainerProps>`
     css`
       background: ${({ theme }) => theme.color.green};
     `};
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      background-color: ${({ theme }) => theme.color.disabled}80;
+    `}
 `;
 
 export const Label = styled.Text`

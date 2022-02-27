@@ -17,7 +17,7 @@ const Welcome = () => {
       await auth().signInWithCredential(googleCredential);
       navigation.navigate(constants.home);
     } catch (err) {
-      console.log(err);
+      return err;
     }
   };
 
@@ -25,7 +25,7 @@ const Welcome = () => {
     <S.Container>
       <StatusBar
         translucent
-        backgroundColor={theme.color.background}
+        backgroundColor={theme.color.light}
         barStyle={'dark-content'}
       />
       <S.Image />

@@ -2,61 +2,103 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { ButtonColorProps } from '../../../types/components/button';
+
+interface FilterButtonProps {
+  color: ButtonColorProps;
+  active?: boolean;
+}
 
 export const Container = styled.View`
   flex: 1;
   background: ${({ theme }) => theme.color.background};
 `;
 
-export const TitleContainer = styled.View`
-  background: ${({ theme }) => theme.color.button_secondary};
-  padding-bottom: 30px;
-  elevation: 20;
-`;
-
-export const SearchAndAddContainer = styled.View`
-  flex-direction: row;
-  align-items: center;
-  margin-top: ${widthPercentageToDP(5)}px;
+export const SearchContainer = styled.View`
+  width: 100%;
+  padding: ${RFValue(10)}px 0;
 `;
 
 export const SearchInput = styled.TextInput`
-  width: ${widthPercentageToDP(60)}px;
-  height: ${heightPercentageToDP(7)}px;
-  background: ${({ theme }) => theme.color.button};
-  border-radius: 10px;
-  margin-left: ${widthPercentageToDP(7)}px;
-  padding-left: 26px;
+  height: ${heightPercentageToDP(6)}px;
+  width: 90%;
+  background: ${({ theme }) => theme.color.light};
+  border-radius: ${heightPercentageToDP(8)}px;
+  margin: auto auto;
+
   font-family: ${({ theme }) => theme.fonts.medium};
-  color: ${({ theme }) => theme.color.text_header};
-  elevation: 20;
+  color: ${({ theme }) => theme.color.purple_light};
+  text-align: center;
+  font-size: ${RFValue(15)}px;
+
+  elevation: 10;
 `;
 
-export const AddItemButton = styled.TouchableOpacity`
-  height: ${heightPercentageToDP(7)}px;
-  padding: 7px;
-  /* width: ${heightPercentageToDP(10)}px; */
-  background: ${({ theme }) => theme.color.button};
-  margin-left: ${widthPercentageToDP(2)}px;
-  border-radius: 10px;
-
-  justify-content: center;
-  align-items: center;
+export const FiltersContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: ${RFValue(10)}px ${RFValue(10)}px ${RFValue(40)}px;
 `;
 
-export const AddItemButtonText = styled.Text`
-  color: ${({ theme }) => theme.color.button_secondary};
-  font-family: ${({ theme }) => theme.fonts.medium};
-  font-size: ${widthPercentageToDP(4.5)}px;
-  elevation: 20;
+export const FilterButton = styled.TouchableOpacity<FilterButtonProps>`
+  padding: ${RFValue(7)}px ${RFValue(12)}px;
+  border-radius: ${RFValue(22)}px;
+
+  ${({ color, theme }) =>
+    color === 'purple' &&
+    css`
+      background: ${theme.color.purple_dark};
+    `}
+
+  ${({ color, theme }) =>
+    color === 'green' &&
+    css`
+      background: ${theme.color.green};
+    `}
+
+    ${({ color, theme }) =>
+    color === 'orange' &&
+    css`
+      background: ${theme.color.orange};
+    `}
+    
+
+  ${({ color, theme, active }) =>
+    color === 'purple' &&
+    !active &&
+    css`
+      background: ${theme.color.purple_dark}70;
+    `}
+
+    ${({ color, theme, active }) =>
+    color === 'green' &&
+    !active &&
+    css`
+      background: ${theme.color.green}70;
+    `}
+    
+    ${({ color, theme, active }) =>
+    color === 'orange' &&
+    !active &&
+    css`
+      background: ${theme.color.orange}70;
+    `}
 `;
 
-export const ItemsTitle = styled.Text`
-  font-size: ${heightPercentageToDP(4)}px;
-  color: ${({ theme }) => theme.color.primary};
+export const FilterText = styled.Text`
+  color: ${({ theme }) => theme.color.light};
   font-family: ${({ theme }) => theme.fonts.medium};
-  margin: ${heightPercentageToDP(4)}px ${widthPercentageToDP(7)}px;
+  font-size: ${RFValue(14)}px;
+`;
+
+export const NoItems = styled.Text`
+  font-family: ${({ theme }) => theme.fonts.medium};
+  font-size: ${RFValue(20)}px;
+  margin: ${RFValue(116)}px ${widthPercentageToDP(10)}px;
+  text-align: center;
+  color: ${({ theme }) => theme.color.disabled};
 `;
 
 export const ItemsContainer = styled.ScrollView``;

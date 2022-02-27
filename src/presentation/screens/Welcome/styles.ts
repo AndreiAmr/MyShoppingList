@@ -12,7 +12,7 @@ interface ButtonProps {
 
 export const Container = styled.View`
   flex: 1;
-  background: ${({ theme }) => theme.color.background};
+  background: ${({ theme }) => theme.color.light};
   justify-content: center;
   align-items: center;
 `;
