@@ -37,6 +37,7 @@ const Item = ({
   onTake,
   onGoBack,
   simultaneousHandlers,
+  handleOpenModalPrice,
 }: ItemComponentProps) => {
   const theme = useTheme();
   const translateX = useSharedValue(0);
@@ -62,15 +63,23 @@ const Item = ({
           }
         });
       } else if (translateX.value > TRANSLATED_X_ADD_TRESHOLD) {
-        translateX.value = withTiming(screenWidth);
-        itemHeight.value = withTiming(0);
-        itemOpacity.value = withTiming(0);
+        if (price !== 0) {
+          translateX.value = withTiming(screenWidth);
+          itemHeight.value = withTiming(0);
+          itemOpacity.value = withTiming(0);
+        } else {
+          translateX.value = withTiming(0);
+        }
         itemMargin.value = withTiming(0, undefined, isFinished => {
-          if (isFinished && onTake) {
-            return runOnJS(onTake)(id);
-          }
-          if (isFinished && onGoBack) {
-            return runOnJS(onGoBack)(id);
+          if (price !== 0) {
+            if (isFinished && onTake) {
+              return runOnJS(onTake)(id);
+            }
+            if (isFinished && onGoBack) {
+              return runOnJS(onGoBack)(id);
+            }
+          } else {
+            runOnJS(handleOpenModalPrice)({ id, price: String(price) });
           }
         });
       } else {

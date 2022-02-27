@@ -2,7 +2,11 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { StatusBar } from 'react-native';
 import { useTheme } from 'styled-components';
-import { getTakedItems, handleBackItem } from '../../../integrations/Item';
+import {
+  getTakedItems,
+  handleBackItem,
+  handleDeleteItem,
+} from '../../../integrations/Item';
 import { ItemProps } from '../../../types/item';
 import Header from '../../components/Header';
 import Item from '../../components/Item';
@@ -65,10 +69,11 @@ const AddReceipt = () => {
 
       {takedItens.map(item => (
         <Item
+          handleOpenModalPrice={() => {}}
           name={item.name}
           id={item.id || ''}
           itemColor={item.itemColor}
-          onDelete={handleBackItem}
+          onDelete={handleDeleteItem}
           onGoBack={handleGoBackItem}
           price={item.price}
           priorityLevel={item.priorityLevel}

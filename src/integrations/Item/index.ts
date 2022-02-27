@@ -7,6 +7,7 @@ import {
   GetUntakedItemsProps,
   ItemProps,
 } from '../../types/item';
+import { Alert } from 'react-native';
 
 export const createNewItem = async ({
   name,
@@ -102,7 +103,7 @@ export const handleBackItem = (id: string) => {
 
 export const handleDeleteItem = (id: string) => {
   const userID = auth().currentUser?.uid;
-
+  Alert.alert('teste de aapagar');
   try {
     firestore().collection(`${userID}`).doc(id).delete();
   } catch (err) {
@@ -117,6 +118,22 @@ export const handleTakeItem = (id: string) => {
       .collection(`${userID}`)
       .doc(id)
       .update({
+        takedAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      } as ItemProps);
+  } catch (err) {
+    return err;
+  }
+};
+
+export const handleSetItemPrice = (id: string, price: number) => {
+  const userID = auth().currentUser?.uid;
+  try {
+    firestore()
+      .collection(`${userID}`)
+      .doc(id)
+      .update({
+        price,
         takedAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       } as ItemProps);

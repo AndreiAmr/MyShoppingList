@@ -22,6 +22,11 @@ export interface GetTakedItems {
   callback: (data: ItemProps[]) => void;
 }
 
+export type ItemModalPriceProps = {
+  id: string;
+  price: string;
+};
+
 export interface ItemComponentProps
   extends Pick<PanGestureHandlerProps, 'simultaneousHandlers'> {
   name: string;
@@ -33,6 +38,7 @@ export interface ItemComponentProps
   onDelete: (id: string) => void;
   onTake?: (id: string) => void;
   onGoBack?: (id: string) => void;
+  handleOpenModalPrice: (props: ItemModalPriceProps) => void;
 }
 
 export interface ModalItemProps {

@@ -20,6 +20,7 @@ export const Container = styled.View`
 export const SearchContainer = styled.View`
   width: 100%;
   padding: ${RFValue(10)}px 0;
+  margin-top: ${RFValue(10)}px;
 `;
 
 export const SearchInput = styled.TextInput`

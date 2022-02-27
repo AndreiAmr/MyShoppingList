@@ -1,26 +1,40 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useTheme } from 'styled-components/native';
+import { Modal, StatusBar } from 'react-native';
 import {
   getUntakedItems,
   handleDeleteItem,
   handleTakeItem,
 } from '../../../integrations/Item';
-import { ItemProps } from '../../../types/item';
+import { ItemModalPriceProps, ItemProps } from '../../../types/item';
 import Header from '../../components/Header';
 import Item from '../../components/Item';
-
 import * as S from './styles';
+
+import ModalPrice from '../../components/ModalPrice';
 
 const NewList = () => {
   const theme = useTheme();
   const [unpayedItems, setUnpayedItems] = useState<ItemProps[]>([]);
   const [activeFilter, setActiveFilter] = useState<string>();
+  const [modalPriceInfos, setModalPriceInfos] = useState<ItemModalPriceProps>();
+  const [modalPriceVisible, setModalPriceVisible] = useState<boolean>(false);
+
   const scrollRef = useRef(null);
 
   const handleChangeUnpayedItems = (data: ItemProps[]) => {
     setUnpayedItems(data);
   };
+
+  const handleOpenModalPrice = (props: ItemModalPriceProps) => {
+    setModalPriceVisible(true);
+    setModalPriceInfos(props);
+  };
+  const handleCloseModalPrice = useCallback(() => {
+    setModalPriceVisible(false);
+    setModalPriceInfos(undefined);
+  }, []);
 
   const getItems = useCallback(() => {
     getUntakedItems({
@@ -47,6 +61,7 @@ const NewList = () => {
           quantity={item.quantity}
           onTake={handleTakeItem}
           simultaneousHandlers={scrollRef}
+          handleOpenModalPrice={handleOpenModalPrice}
         />,
       );
     });
@@ -60,6 +75,7 @@ const NewList = () => {
 
   return (
     <S.Container>
+      <StatusBar backgroundColor={theme.color.background} />
       <Header goBackLabel="voltar" title="Nova Lista" />
       <S.SearchContainer>
         <S.SearchInput
@@ -99,6 +115,15 @@ const NewList = () => {
       ) : (
         <S.ItemsContainer ref={scrollRef}>{renderItems()}</S.ItemsContainer>
       )}
+      <Modal visible={modalPriceVisible} animationType="fade" transparent>
+        <StatusBar backgroundColor={`${theme.color.purple_light}70`} />
+        {modalPriceInfos && modalPriceInfos.id && (
+          <ModalPrice
+            handleCloseModalPrice={handleCloseModalPrice}
+            id={modalPriceInfos.id}
+          />
+        )}
+      </Modal>
     </S.Container>
   );
 };
