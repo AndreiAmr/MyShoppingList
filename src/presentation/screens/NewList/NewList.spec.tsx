@@ -30,7 +30,11 @@ jest.mock('@fortawesome/react-native-fontawesome', () => {
   };
 });
 
-jest.mock('react-native-gesture-handler', () => {});
+jest.mock('react-native-gesture-handler', () => {
+  return {
+    ScrollView: '',
+  };
+});
 
 jest.mock('react-native-reanimated', () => {
   return {
