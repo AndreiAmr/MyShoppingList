@@ -5,6 +5,7 @@ import {
 import styled, { css } from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { ButtonColorProps } from '../../../types/components/button';
+import { ScrollView } from 'react-native-gesture-handler';
 
 interface FilterButtonProps {
   color: ButtonColorProps;
@@ -101,4 +102,6 @@ export const NoItems = styled.Text`
   color: ${({ theme }) => theme.color.disabled};
 `;
 
-export const ItemsContainer = styled.ScrollView``;
+export const ItemsContainer = styled(ScrollView)`
+  flex: 1;
+`;

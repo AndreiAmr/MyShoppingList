@@ -1,3 +1,5 @@
+import { PanGestureHandlerProps } from 'react-native-gesture-handler';
+
 export interface ItemProps {
   id?: string;
   name: string;
@@ -16,8 +18,12 @@ export type ItemColors = 'purple' | 'blue' | 'green' | 'yellow' | 'orange';
 export interface GetUntakedItemsProps {
   callback: (data: ItemProps[]) => void;
 }
+export interface GetTakedItems {
+  callback: (data: ItemProps[]) => void;
+}
 
-export interface ItemComponentProps {
+export interface ItemComponentProps
+  extends Pick<PanGestureHandlerProps, 'simultaneousHandlers'> {
   name: string;
   quantity: number;
   priorityLevel: number;
@@ -25,7 +31,8 @@ export interface ItemComponentProps {
   price: number;
   id: string;
   onDelete: (id: string) => void;
-  onTake: (id: string) => void;
+  onTake?: (id: string) => void;
+  onGoBack?: (id: string) => void;
 }
 
 export interface ModalItemProps {

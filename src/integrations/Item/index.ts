@@ -2,7 +2,11 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import uuid from 'react-native-uuid';
 
-import { GetUntakedItemsProps, ItemProps } from '../../types/item';
+import {
+  GetTakedItems,
+  GetUntakedItemsProps,
+  ItemProps,
+} from '../../types/item';
 
 export const createNewItem = async ({
   name,
@@ -56,6 +60,46 @@ export const getUntakedItems = ({ callback }: GetUntakedItemsProps) => {
   }
 };
 
+export const getTakedItems = ({ callback }: GetTakedItems) => {
+  try {
+    const userID = auth().currentUser?.uid;
+    firestore()
+      .collection(`${userID}`)
+      .onSnapshot(snapshot => {
+        const items: ItemProps[] = [];
+        snapshot.docs.forEach(item => {
+          const itemData = item.data() as ItemProps;
+          if (itemData.takedAt !== null) {
+            return items.push({
+              id: item.id,
+              ...item.data(),
+            } as ItemProps);
+          } else {
+            return;
+          }
+        });
+        callback(items);
+      });
+  } catch (err) {
+    return err;
+  }
+};
+
+export const handleBackItem = (id: string) => {
+  try {
+    const userID = auth().currentUser?.uid;
+    firestore()
+      .collection(`${userID}`)
+      .doc(id)
+      .update({
+        takedAt: null,
+        updatedAt: new Date().toISOString(),
+      } as ItemProps);
+  } catch (err) {
+    return err;
+  }
+};
+
 export const handleDeleteItem = (id: string) => {
   const userID = auth().currentUser?.uid;
 
@@ -69,9 +113,13 @@ export const handleDeleteItem = (id: string) => {
 export const handleTakeItem = (id: string) => {
   const userID = auth().currentUser?.uid;
   try {
-    firestore().collection(`${userID}`).doc(id).update({
-      takedAt: new Date().toISOString(),
-    });
+    firestore()
+      .collection(`${userID}`)
+      .doc(id)
+      .update({
+        takedAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      } as ItemProps);
   } catch (err) {
     return err;
   }

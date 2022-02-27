@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useTheme } from 'styled-components/native';
 import {
@@ -14,10 +14,9 @@ import * as S from './styles';
 
 const NewList = () => {
   const theme = useTheme();
-
   const [unpayedItems, setUnpayedItems] = useState<ItemProps[]>([]);
-
   const [activeFilter, setActiveFilter] = useState<string>();
+  const scrollRef = useRef(null);
 
   const handleChangeUnpayedItems = (data: ItemProps[]) => {
     setUnpayedItems(data);
@@ -47,6 +46,7 @@ const NewList = () => {
           priorityLevel={item.priorityLevel}
           quantity={item.quantity}
           onTake={handleTakeItem}
+          simultaneousHandlers={scrollRef}
         />,
       );
     });
@@ -97,7 +97,7 @@ const NewList = () => {
           Adicione itens à sua lista de compras para ve-los aqui!
         </S.NoItems>
       ) : (
-        <S.ItemsContainer>{renderItems()}</S.ItemsContainer>
+        <S.ItemsContainer ref={scrollRef}>{renderItems()}</S.ItemsContainer>
       )}
     </S.Container>
   );
