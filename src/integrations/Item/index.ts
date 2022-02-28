@@ -7,7 +7,6 @@ import {
   GetUntakedItemsProps,
   ItemProps,
 } from '../../types/item';
-import { Alert } from 'react-native';
 
 export const createNewItem = async ({
   name,
@@ -103,7 +102,6 @@ export const handleBackItem = (id: string) => {
 
 export const handleDeleteItem = (id: string) => {
   const userID = auth().currentUser?.uid;
-  Alert.alert('teste de aapagar');
   try {
     firestore().collection(`${userID}`).doc(id).delete();
   } catch (err) {
