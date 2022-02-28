@@ -12,6 +12,8 @@ jest.mock('react-native-responsive-screen', () => {
   };
 });
 
+jest.mock('react-native-responsive-fontsize', () => {});
+
 jest.mock('@react-navigation/native', () => {
   return {
     useNavigation: () => {},
@@ -20,6 +22,7 @@ jest.mock('@react-navigation/native', () => {
 
 jest.mock('@react-native-google-signin/google-signin', () => {});
 jest.mock('@react-native-firebase/auth', () => {});
+jest.mock('@react-native-async-storage/async-storage', () => {});
 
 const ComponentToTest = () => {
   return (
