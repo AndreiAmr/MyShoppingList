@@ -42,11 +42,15 @@ export const FiltersContainer = styled.View`
   flex-direction: row;
   justify-content: space-evenly;
   margin: ${RFValue(10)}px ${RFValue(10)}px ${RFValue(40)}px;
+  padding: 0 ${RFValue(20)}px;
 `;
 
 export const FilterButton = styled.TouchableOpacity<FilterButtonProps>`
   padding: ${RFValue(7)}px ${RFValue(12)}px;
   border-radius: ${RFValue(22)}px;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
 
   ${({ color, theme }) =>
     color === 'purple' &&

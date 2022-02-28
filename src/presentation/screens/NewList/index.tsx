@@ -14,10 +14,12 @@ import * as S from './styles';
 
 import ModalPrice from '../../components/ModalPrice';
 
+type FilterOptionsType = 'priority' | 'price';
+
 const NewList = () => {
   const theme = useTheme();
   const [unpayedItems, setUnpayedItems] = useState<ItemProps[]>([]);
-  const [activeFilter, setActiveFilter] = useState<string>();
+  const [activeFilter, setActiveFilter] = useState<FilterOptionsType>();
   const [modalPriceInfos, setModalPriceInfos] = useState<ItemModalPriceProps>();
   const [modalPriceVisible, setModalPriceVisible] = useState<boolean>(false);
   const [filterByName, setFilterByName] = useState<string>('');
@@ -54,7 +56,7 @@ const NewList = () => {
     [unpayedItems],
   );
 
-  const handleChangeActiveFilter = (filterName: string) => {
+  const handleChangeActiveFilter = (filterName: FilterOptionsType) => {
     setActiveFilter(filterName);
   };
 
@@ -101,9 +103,33 @@ const NewList = () => {
     return items;
   };
 
+  const handleFilterByOption = (filterOption: FilterOptionsType) => {
+    let items: ItemProps[] = [];
+    setFilterByName('');
+    switch (filterOption) {
+      case 'priority': {
+        items = unpayedItems
+          .sort((previous, next) => {
+            return previous.priorityLevel - next.priorityLevel;
+          })
+          .reverse();
+        break;
+      }
+      case 'price': {
+        items = unpayedItems.sort((previous, next) => {
+          return previous.price - next.price;
+        });
+        break;
+      }
+    }
+    setItemsFiltered(items);
+  };
+
   useEffect(() => {
     getItems();
   }, [getItems]);
+
+  useEffect(() => {}, []);
 
   return (
     <S.Container>
@@ -120,25 +146,25 @@ const NewList = () => {
 
       <S.FiltersContainer>
         <S.FilterButton
-          onPress={() => handleChangeActiveFilter('purple')}
-          active={activeFilter === 'purple'}
+          onPress={() => {
+            handleFilterByOption('priority');
+            handleChangeActiveFilter('priority');
+          }}
+          active={activeFilter === 'priority'}
           color="purple"
         >
           <S.FilterText>Prioridade</S.FilterText>
         </S.FilterButton>
         <S.FilterButton
-          onPress={() => handleChangeActiveFilter('green')}
-          active={activeFilter === 'green'}
+          onPress={() => {
+            handleFilterByOption('price');
+
+            handleChangeActiveFilter('price');
+          }}
+          active={activeFilter === 'price'}
           color="green"
         >
           <S.FilterText>Preço</S.FilterText>
-        </S.FilterButton>
-        <S.FilterButton
-          onPress={() => handleChangeActiveFilter('orange')}
-          active={activeFilter === 'orange'}
-          color="orange"
-        >
-          <S.FilterText>Data de criação</S.FilterText>
         </S.FilterButton>
       </S.FiltersContainer>
 
