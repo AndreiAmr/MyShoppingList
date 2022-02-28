@@ -20,7 +20,8 @@ const NewList = () => {
   const [activeFilter, setActiveFilter] = useState<string>();
   const [modalPriceInfos, setModalPriceInfos] = useState<ItemModalPriceProps>();
   const [modalPriceVisible, setModalPriceVisible] = useState<boolean>(false);
-
+  const [filterByName, setFilterByName] = useState<string>('');
+  const [itemsFiltered, setItemsFiltered] = useState<ItemProps[]>([]);
   const scrollRef = useRef(null);
 
   const handleChangeUnpayedItems = (data: ItemProps[]) => {
@@ -42,29 +43,60 @@ const NewList = () => {
     });
   }, []);
 
+  const handleChangeFilterByName = useCallback(
+    (itemName: string) => {
+      const itemsFounded = unpayedItems.filter(item =>
+        item.name.includes(itemName),
+      );
+      setFilterByName(itemName);
+      setItemsFiltered(itemsFounded);
+    },
+    [unpayedItems],
+  );
+
   const handleChangeActiveFilter = (filterName: string) => {
     setActiveFilter(filterName);
   };
 
   const renderItems = () => {
     const items: JSX.Element[] = [];
-    unpayedItems.forEach(item => {
-      items.push(
-        <Item
-          key={item.id}
-          id={item.id as string}
-          onDelete={handleDeleteItem}
-          name={item.name}
-          itemColor={item.itemColor}
-          price={item.price}
-          priorityLevel={item.priorityLevel}
-          quantity={item.quantity}
-          onTake={handleTakeItem}
-          simultaneousHandlers={scrollRef}
-          handleOpenModalPrice={handleOpenModalPrice}
-        />,
-      );
-    });
+    if (filterByName === '') {
+      unpayedItems.forEach(item => {
+        items.push(
+          <Item
+            key={item.id}
+            id={item.id as string}
+            onDelete={handleDeleteItem}
+            name={item.name}
+            itemColor={item.itemColor}
+            price={item.price}
+            priorityLevel={item.priorityLevel}
+            quantity={item.quantity}
+            onTake={handleTakeItem}
+            simultaneousHandlers={scrollRef}
+            handleOpenModalPrice={handleOpenModalPrice}
+          />,
+        );
+      });
+    } else if (itemsFiltered.length !== 0) {
+      itemsFiltered.forEach(item => {
+        items.push(
+          <Item
+            key={item.id}
+            id={item.id as string}
+            onDelete={handleDeleteItem}
+            name={item.name}
+            itemColor={item.itemColor}
+            price={item.price}
+            priorityLevel={item.priorityLevel}
+            quantity={item.quantity}
+            onTake={handleTakeItem}
+            simultaneousHandlers={scrollRef}
+            handleOpenModalPrice={handleOpenModalPrice}
+          />,
+        );
+      });
+    }
 
     return items;
   };
@@ -81,6 +113,8 @@ const NewList = () => {
         <S.SearchInput
           placeholder="Pesquisar por nome"
           placeholderTextColor={theme.color.purple_light}
+          value={filterByName}
+          onChangeText={handleChangeFilterByName}
         />
       </S.SearchContainer>
 
@@ -115,6 +149,7 @@ const NewList = () => {
       ) : (
         <S.ItemsContainer ref={scrollRef}>{renderItems()}</S.ItemsContainer>
       )}
+
       <Modal visible={modalPriceVisible} animationType="fade" transparent>
         <StatusBar backgroundColor={`${theme.color.purple_light}70`} />
         {modalPriceInfos && modalPriceInfos.id && (
